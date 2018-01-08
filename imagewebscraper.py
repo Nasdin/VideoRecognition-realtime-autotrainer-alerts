@@ -56,4 +56,8 @@ def _images_get_all_items(page):
             page = page[end_content:]
     return items
 
+#TODO download an image with input of image url into a directory( another input) using requests
+
+
+
 

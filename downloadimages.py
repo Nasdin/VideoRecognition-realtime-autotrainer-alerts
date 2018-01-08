@@ -17,7 +17,7 @@ from imagewebscraper import _images_get_all_items #function to get all links
 #parameters
 search_keyword = ['Burning Cars']
 keywords = [' high resolution']
-save_directory = 'data/downloads/'
+save_directory = "data/downloads/"
 
 
 if __name__ == "__main__":
@@ -56,7 +56,7 @@ if __name__ == "__main__":
         print("\n")
 
         # This allows you to write all the links into a test file. This text file will be created in the same directory as your code. You can comment out the below 3 lines to stop writing the output to the text file.
-        info = open('output.txt', 'a')  # Open the text file called database.txt
+        info = open(save_directory+'output.txt', 'a')  # Open the text file called database.txt
         info.write(str(i) + ': ' + str(search_keyword[i - 1]) + ": " + str(items) + "\n\n\n")  # Write the title of the page
         info.close()  # Close the file
 
@@ -68,44 +68,50 @@ if __name__ == "__main__":
         ## To save imges to the save_directory
         # IN this saving process we are just skipping the URL if there is any error
 
-        k = 0
-        errorCount = 0
-        while (k < len(items)):
-            from urllib import Request, urlopen
-            from urllib import URLError, HTTPError
+        #links of images are saved in items variable, hence we will loop through items and download that into a folder
+        #this part is bugged and hence will have to be rewritten for python3
 
-            try:
-                req = Request(items[k], headers={
-                    "User-Agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"})
-                response = urlopen(req, None, 15)
-                output_file = open(save_directory+search_keywords + "/" + str(k + 1) + ".jpg", 'wb')
 
-                data = response.read()
-                output_file.write(data)
-                response.close();
-
-                print("completed ====> " + str(k + 1))
-
-                k = k + 1;
-
-            except IOError:  # If there is any IOError
-
-                errorCount += 1
-                print("IOError on image " + str(k + 1))
-                k = k + 1;
-
-            except HTTPError as e:  # If there is any HTTPError
-
-                errorCount += 1
-                print("HTTPError" + str(k))
-                k = k + 1;
-            except URLError as e:
-
-                errorCount += 1
-                print("URLError " + str(k))
-                k = k + 1;
-
-        i = i + 1
+        # k = 0
+        # errorCount = 0
+        # while (k < len(items)):
+        #     from urllib import request
+        #     from urllib.error import URLError, HTTPError
+        #
+        #     try:
+        #         req = request.Request(items[k], headers={
+        #             "User-Agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"})
+        #         response = request.urlopen(req, None, 15)
+        #         output_filename = (save_directory+(str(search_keywords)) + "/" + str(k + 1) + ".jpg")
+        #         print (output_filename)
+        #         #output_file = open(save_directory+(str(search_keywords)) + "/" + str(k + 1) + ".jpg", 'wb')
+        #
+        #         data = response.read()
+        #         output_file.write(data)
+        #         response.close()
+        #
+        #         print("completed ====> " + str(k + 1))
+        #
+        #         k +=1
+        #
+        #     except IOError:  # If there is any IOError
+        #
+        #         errorCount += 1
+        #         print("IOError on image " + str(k + 1))
+        #         k +=1
+        #
+        #     except HTTPError as e:  # If there is any HTTPError
+        #
+        #         errorCount += 1
+        #         print("HTTPError" + str(k))
+        #         k = k + 1;
+        #     except URLError as e:
+        #
+        #         errorCount += 1
+        #         print("URLError " + str(k))
+        #         k = k + 1;
+        #
+        # i = i + 1
 
     print("\n")
     print("Everything downloaded!")
