@@ -1,5 +1,5 @@
 
-## Detecting burning cars in video streams by Nasrudin Salim
+## Detecting burning cars in real-time video feeds by Nasrudin Salim
 ## This project is still a WIP
 
 Real-time object detection and classification. Paper: [version 1](https://arxiv.org/pdf/1506.02640.pdf) , [Version 2](https://arxiv.org/pdf/1612.08242.pdf) 
