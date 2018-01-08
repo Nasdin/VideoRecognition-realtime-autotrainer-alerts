@@ -17,6 +17,7 @@ I used a webscraper and google image search to scrape for pictures and gifs of b
 Using a webcam, point webcam to videos of burning cars, either from movies or from youtube clips. It should classify burning cars when one is present.
 
 ### Results
+This is still a WIP
 
 ### Further work
 When a burning car is detected, we can move onto another pipeline towards output and send an alert.
