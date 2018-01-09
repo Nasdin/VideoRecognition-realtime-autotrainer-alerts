@@ -11,7 +11,7 @@ import time  # Importing the time library to check the time of code execution
 import os
 from imagewebscraper import download_page #the function to open the download page
 from imagewebscraper import _images_get_all_items #function to get all links
-
+import requests
 
 
 #parameters
