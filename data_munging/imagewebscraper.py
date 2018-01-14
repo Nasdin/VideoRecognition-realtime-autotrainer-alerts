@@ -56,6 +56,37 @@ def _images_get_all_items(page):
             page = page[end_content:]
     return items
 
+#replace spaces in string with %20
+def clean_search(word):
+    ''' replaces spaces in string with %20'''
+    return word.replace(" ","%20")
+
+#remove duplicates from a dictionary across all keys and elements
+def remove_duplicates(dictionary):
+    output = {}
+    seen = set()
+    for keys in dictionary:
+        output.update({keys:[]})
+        for value in dictionary[keys]:
+            # If value has not been encountered yet,
+            # ... add it to both list and set.
+            if value not in seen:
+                output[keys].append(value) #add it to the list
+                seen.add(value)
+    return output
+
+#get the filetype of of a url
+def getfiletype(url):
+    possibletypes = ['.jpg','.png','.gif','.jpeg','.mp4','.avi','.tif','.wmv','.flv']
+    url = url.lower() #case insensitive
+    for i in possibletypes:
+        if i in url:
+            return i
+    return "?"
+
+
+
+
 #TODO download an image with input of image url into a directory( another input) using requests
 
 

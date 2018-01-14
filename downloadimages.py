@@ -9,109 +9,113 @@
 
 import time  # Importing the time library to check the time of code execution
 import os
-from imagewebscraper import download_page #the function to open the download page
-from imagewebscraper import _images_get_all_items #function to get all links
-import requests
+from data_munging.imagewebscraper import download_page, _images_get_all_items, clean_search, remove_duplicates, getfiletype
+
 
 
 #parameters
-search_keyword = ['Burning Cars']
-keywords = [' high resolution']
+search_keyword = ['Burning Cars', 'flaming car', 'burning car','flaming cars','exploding car','exploding cars'] #a list of strings to search for
 save_directory = "data/downloads/"
+verification = 'cars' #using a smaller model later to check whether the downloaded pictures contain the follow category
+train_ratio = 0.7 #The ratio of train to the entire data set. Test_ratio will be taken as 1- train_ratio
 
 
 if __name__ == "__main__":
 
     t0 = time.time()  # start the timer
+    items = {} #create the items dictionary here
 
-
-    i = 0
-    while i < len(search_keyword):
-        items = []
-        iteration = "Item no.: " + str(i + 1) + " -->" + " Item name = " + str(search_keyword[i])
+    for index,i in enumerate(search_keyword):
+        items.update({i:[]}) #create a list for this search keyword
+        iteration = "Item no.: " + str(index + 1) + " -->" + " Item name = " + str(i)
         print(iteration)
-        print("Evaluating...")
-        search_keywords = search_keyword[i]
-        search = search_keywords.replace(' ', '%20')
 
         # make a search keyword  directory
         try:
-            os.makedirs(search_keywords)
+            os.makedirs(save_directory+i)
         except OSError as e:
             if e.errno != 17:
                 raise
                 # time.sleep might help here
             pass
 
-        j = 0
-        while j < len(keywords):
-            pure_keyword = keywords[j].replace(' ', '%20')
-            url = 'https://www.google.com/search?q=' + search + pure_keyword + '&espv=2&biw=1366&bih=667&site=webhp&source=lnms&tbm=isch&sa=X&ei=XosDVaCXD8TasATItgE&ved=0CAcQ_AUoAg'
-            raw_html = (download_page(url))
-            time.sleep(0.1)
-            items = items + (_images_get_all_items(raw_html))
-            j = j + 1
-        # print ("Image Links = "+str(items))
-        print("Total Image Links = " + str(len(items)))
-        print("\n")
+        #Search for the search_keyword
 
-        # This allows you to write all the links into a test file. This text file will be created in the same directory as your code. You can comment out the below 3 lines to stop writing the output to the text file.
-        info = open(save_directory+'output.txt', 'a')  # Open the text file called database.txt
-        info.write(str(i) + ': ' + str(search_keyword[i - 1]) + ": " + str(items) + "\n\n\n")  # Write the title of the page
-        info.close()  # Close the file
+        search = clean_search(i)
+        url = 'https://www.google.com/search?q=' + search + \
+              '&espv=2&biw=1366&bih=667&site=webhp&source=lnms&tbm=isch&sa=X&ei=XosDVaCXD8TasATItgE&ved=0CAcQ_AUoAg'
+        raw_html = download_page(url)
+        items[i] = _images_get_all_items(raw_html)
+
+        # print ("Image Links = "+str(items))
+        before = len(items[i])
+        print("Total Image Links = " + str(before))
+        print("\n","Removing Duplicates")
+
+        #remove possible duplicates from searches
+        items = remove_duplicates(items)
+        after = len(items[i])
+        print("Total Image Links = " + str(after))
+        print("Duplicates removed = " + str(before-after))
+
+
+        #Write all the saved linked into a text file
+        with open(save_directory+'output.txt', 'a') as info:
+            info.write(str(i) + ':' + str(
+                items) + "\n\n\n")
+            info.close()  # Close the file
 
         t1 = time.time()  # stop the timer
-        total_time = t1 - t0  # Calculating the total time required to crawl, find and download all the links of 60,000 images
+        total_time = t1 - t0  # Calculating the total time required to crawl
         print("Total time taken: " + str(total_time) + " Seconds")
         print("Starting Download...")
 
         ## To save imges to the save_directory
-        # IN this saving process we are just skipping the URL if there is any error
+        # IN this saving process we are just skip the URL if there is any error
 
         #links of images are saved in items variable, hence we will loop through items and download that into a folder
-        #this part is bugged and hence will have to be rewritten for python3
 
 
-        # k = 0
-        # errorCount = 0
-        # while (k < len(items)):
-        #     from urllib import request
-        #     from urllib.error import URLError, HTTPError
-        #
-        #     try:
-        #         req = request.Request(items[k], headers={
-        #             "User-Agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"})
-        #         response = request.urlopen(req, None, 15)
-        #         output_filename = (save_directory+(str(search_keywords)) + "/" + str(k + 1) + ".jpg")
-        #         print (output_filename)
-        #         #output_file = open(save_directory+(str(search_keywords)) + "/" + str(k + 1) + ".jpg", 'wb')
-        #
-        #         data = response.read()
-        #         output_file.write(data)
-        #         response.close()
-        #
-        #         print("completed ====> " + str(k + 1))
-        #
-        #         k +=1
-        #
-        #     except IOError:  # If there is any IOError
-        #
-        #         errorCount += 1
-        #         print("IOError on image " + str(k + 1))
-        #         k +=1
-        #
-        #     except HTTPError as e:  # If there is any HTTPError
-        #
-        #         errorCount += 1
-        #         print("HTTPError" + str(k))
-        #         k = k + 1;
-        #     except URLError as e:
-        #
-        #         errorCount += 1
-        #         print("URLError " + str(k))
-        #         k = k + 1;
-        #
-        # i = i + 1
+        errorCount = 0
+        for index,image_link in enumerate(items[i]):
+            from urllib import request
+            from urllib.error import URLError, HTTPError
+
+            try:
+                filetype = getfiletype(image_link)
+                if filetype == "?":
+                    print ("can't find filetype for file", image_link,"defaulting to .jpg")
+                    filetype = '.jpg'
+                req = request.Request(image_link, headers={
+                    "User-Agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"})
+                output_filename = (save_directory+(str(i)) + "/" + str(index + 1) + filetype)
+                print (output_filename)
+
+                #save the file
+                with request.urlopen(req, None, 15) as response:
+                    with open(output_filename,'wb') as output_file:
+                        output_file.write(response.read())
+                        output_file.close()
+                    response.close()
+
+
+                print("completed ====> " + str(index + 1))
+
+
+            except IOError:  # If there is any IOError
+
+                errorCount += 1
+                print("IOError on image " + str(index + 1))
+
+            except HTTPError as e:  # If there is any HTTPError
+
+                errorCount += 1
+                print("HTTPError" + str(index))
+            except URLError as e:
+
+                errorCount += 1
+                print("URLError " + str(index))
+
 
     print("\n")
     print("Everything downloaded!")
