@@ -9,7 +9,7 @@ import time  # Importing the time library to check the time of code execution
 import sys  # Importing the System Library
 
 
-#TODO Keras models to detect whether an image is present
+#TODO Keras utils to detect whether an image is present
 #TODO 
 
 

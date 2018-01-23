@@ -1,19 +1,16 @@
 #Author: Nasrudin Bin Salim
 #Copyright (C) Nasrudin B Salim 2018
+from darkflow.cli import cliHandler as yolo
+
+
+#location of weights
+model_cfg = 'yolo-voc.cfg'
+model_weight = 'weights/yolo-voc.weights'
+video_feed ='camera'
 
 
 
-import os
 
-#Path to data
-download_folder = 'downloads/'
-test_data = 'data/test/'
-train_data = 'data/train/'
-validate_data = 'data/validate/'
 
-#categorical subfolders
-#This will result to data/test/cars/123.png or data/train/cars/123.png or data/validate/cars/123.png
-cars = 'cars/'
-burning_cars = 'burning_cars/'
 
 
