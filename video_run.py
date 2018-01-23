@@ -8,7 +8,13 @@ model_cfg = 'yolo-voc.cfg'
 model_weight = 'weights/yolo-voc.weights'
 video_feed ='camera'
 
+def main():
+    pass
 
+
+
+if __name__ == '__main__':
+    pass
 
 
 

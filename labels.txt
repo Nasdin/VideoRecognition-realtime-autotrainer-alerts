@@ -1,4 +1,4 @@
-aeroplane
-bicycle
-bird
-boat
+person
+bottle
+glasses
+spectacles
