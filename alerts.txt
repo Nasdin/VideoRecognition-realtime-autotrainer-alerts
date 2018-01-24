@@ -1,0 +1,4 @@
+person
+bottle
+glasses
+spectacles
