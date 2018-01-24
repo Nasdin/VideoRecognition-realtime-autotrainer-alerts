@@ -28,8 +28,7 @@
 
 # Usage
 #### Getting Data
-On the webscraper, indicate the label, as well as the search terms to use by editing it and change the parameters in downloadimages.py
-In batch, type
+On the webscraper, indicate the label, as well as the search terms to use by editing it and change the parameters in downloadimages.py then in batch, type
 
 	python downloadimages.py
 
@@ -43,7 +42,7 @@ Edit the parameters in train.py and then in batch type:
 
 #### Testing/Using
 You can test on either a video file, through video_run.py
-You can test on a live webcam beed through camera_run.py
+You can test on a live webcam feed through camera_run.py
 
 	python video_run.py
 	python camera_run.py
