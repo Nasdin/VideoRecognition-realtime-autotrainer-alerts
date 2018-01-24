@@ -3,3 +3,7 @@ weights/*
 .idea
 __py*
 data/*
+bin/*
+bin/
+ckpt/
+ckpt/*
