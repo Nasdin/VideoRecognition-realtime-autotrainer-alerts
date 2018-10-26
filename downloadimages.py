@@ -11,7 +11,7 @@ import time  # Importing the time library to check the time of code execution
 import os
 from data_munging.imagewebscraper import download_page, _images_get_all_items, clean_search, remove_duplicates, getfiletype
 
-
+# TODO: Take search key words from labels.txt
 
 #parameters
 search_keyword = ['Burning Cars', 'flaming car', 'burning car','flaming cars','exploding car','exploding cars'] #a list of strings to search for

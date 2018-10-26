@@ -1,9 +1,9 @@
 
-## Real-Time Video Recognition AI with auto-webscraping trainer + alerts
+## Real-Time Video Recognition AI with auto-webscraping trainer + alerts, YoloV3
 ### By: Nasrudin Salim
 
-#### Real-time object detection and classification with Yolo9000/Yolov2 algorithm
-[Paper 1](https://arxiv.org/pdf/1506.02640.pdf) , [Paper 2](https://arxiv.org/pdf/1612.08242.pdf)  [darkflow](https://github.com/thtrieu/darkflow)   [darknet](http://pjreddie.com/darknet/yolo/) 
+#### Real-time object detection and classification with YoloV3
+
 
 #### Test:
 ![ ](nas-demo.gif  "Algorithm Real-Time Demo")
@@ -46,7 +46,6 @@ Or you can continue training your weights if you've done this before
 Edit the parameters in train.py and then in batch type:
 
 		python train.py -g
-
 
 	-g : Whether to use GPU
 	-e #: Epochs (optional)
