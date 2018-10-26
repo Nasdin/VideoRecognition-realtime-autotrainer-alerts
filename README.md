@@ -25,9 +25,11 @@
 
 ## Installation Instructions:
 - A conda environment file has been provided, please make use of environment file to install the necessary requirement packages.
+- Project uses Cython, so build that too.
 
 
 		conda create -n "YourEnvironmentName" -f environment.yml
+		python3 setup.py build_ext --inplace
 
 Remember to download pretrained weights if you need to
 See training section
@@ -37,7 +39,7 @@ See training section
 On the webscraper, indicate the labels in labels.txt, and change the parameters in config.py if needed then in terminal, type
 
 
-		python downloadimages.py
+		python3 downloadimages.py
 
 #### Training
 Once images are downloaded. You can download pretrained weights here: 
@@ -45,7 +47,7 @@ Once images are downloaded. You can download pretrained weights here:
 Or you can continue training your weights if you've done this before
 Edit the parameters in train.py and then in batch type:
 
-		python train.py -g
+		python3 train.py -g
 
 	-g : Whether to use GPU
 	-e #: Epochs (optional)
@@ -58,7 +60,7 @@ Edit the parameters in train.py and then in batch type:
 #### Testing/Using
 Usage:
 
-	python run.py "path_to_video_file" -g -s "test.avi"
+	python3 run.py "path_to_video_file" -g -s "test.avi"
 	
 #### Explanation
 

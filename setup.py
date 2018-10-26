@@ -5,9 +5,6 @@ import numpy
 import os
 import imp
 
-VERSION = imp.load_source('version', os.path.join('.', 'darkflow', 'version.py'))
-VERSION = VERSION.__version__
-
 if os.name == 'nt':
     ext_modules = [
         Extension("cython_utils.nms",
@@ -63,7 +60,7 @@ else:
     ]
 
 setup(
-    version=VERSION,
+    version=1,
     name='easy_yolo',
     description='Taking a Yolo model and making it practical in Python',
     license='GPLv3',
