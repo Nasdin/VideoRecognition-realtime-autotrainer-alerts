@@ -5,7 +5,7 @@ from os.path import basename
 
 class framework(object):
     constructor = vanilla.constructor
-    loss = yolo.models.vanilla.train.loss
+    loss = vanilla.train.loss
 
     def __init__(self, meta, FLAGS):
         model = basename(meta['model'])

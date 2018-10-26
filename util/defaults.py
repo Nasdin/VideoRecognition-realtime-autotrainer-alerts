@@ -6,7 +6,7 @@ class argHandler(dict):
     _descriptions = {'help, --h, -h': 'show this super helpful message and exit'}
 
     def __init__(self, *args, **kwargs):
-        self.super().__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.setDefaults()
 
     def setDefaults(self):

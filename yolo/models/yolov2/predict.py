@@ -6,8 +6,8 @@ import json
 # from scipy.special import expit
 # from utils.box import BoundBox, box_iou, prob_compare
 # from utils.box import prob_compare2, box_intersection
-from ...utils.box import BoundBox
-from ...cython_utils.cy_yolo2_findboxes import box_constructor
+from util.util import BoundBox
+from cython_utils.cy_yolo2_findboxes import box_constructor
 
 
 def expit(x):
@@ -74,6 +74,5 @@ def postprocess(self, net_out, im, save=True):
         with open(textFile, 'w') as f:
             f.write(textJSON)
         return
-
 
     cv2.imwrite(img_name, imgcv)

@@ -33,7 +33,7 @@ class YoloArgs(argHandler):
         elif tuple_input.use_camera:
             self['demo'] = 'camera'
         if tuple_input.save:
-            # FIXME: We actually want to specify where to save the video to, currently not supported
+            # TODO: We actually want to specify where to save the video to, currently not supported
             self['saveVideo'] = True
 
     def _parse_train_inputs(self, tuple_input: UserTrainInput):

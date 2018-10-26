@@ -36,7 +36,7 @@ def parse_args():
         if not video_path.lower().endswith("avi"):
             print("Not a .avi file")
         use_video = True
-        print("Using Video file {} to load into YOlO".format(video_path))
+        print("Using Video file {} to load into YOLO".format(video_path))
     else:
         print("Using Camera")
 
