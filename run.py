@@ -7,6 +7,7 @@
 
 import argparse
 from config import USE_GPU, SAVE_RESULTS, DEFAULT_VIDEO_SAVE_ADDRESS
+from util.parser import UserRunInput, easy_yolo
 
 
 def parse_args():
@@ -57,9 +58,11 @@ def parse_args():
                      "save": True if save_directory_bool else False,
                      "save_video_fp": save_directory if save_directory_bool else None}
 
-    return argument_dict
+    namedtuple_output = UserRunInput(**argument_dict)
+
+    return namedtuple_output
 
 
 if __name__ == '__main__':
-    argument = parse_args()
-
+    user_inputs = parse_args()
+    easy_yolo(user_inputs)

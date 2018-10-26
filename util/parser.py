@@ -1,4 +1,4 @@
-from util.parser.defaults import argHandler
+from util.defaults import argHandler
 from config import MODEL_CFG_FILE_PATH, MODEL_WEIGHT
 from collections import namedtuple
 import os
