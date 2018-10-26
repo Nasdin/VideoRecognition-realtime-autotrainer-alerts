@@ -16,7 +16,7 @@ from data_munging.imagewebscraper import download_page, _images_get_all_items, c
 #parameters
 search_keyword = ['Burning Cars', 'flaming car', 'burning car','flaming cars','exploding car','exploding cars'] #a list of strings to search for
 save_directory = "data/downloads/"
-verification = 'cars' #using a smaller model later to check whether the downloaded pictures contain the follow category
+
 train_ratio = 0.7 #The ratio of train to the entire data set. Test_ratio will be taken as 1- train_ratio
 
 def download_images(search_keyword=search_keyword,save_directory=save_directory,verification=verification,train_ratio=train_ratio):

@@ -118,5 +118,4 @@ def draw_box(boxes, im, crop_dim):
         thick = int((h + w) // 150)
         cv2.rectangle(imgcv, (left, top), (right, bot), (255, 0, 0), thick)
 
-
     return imgcv
