@@ -1166,6 +1166,15 @@ typedef npy_double __pyx_t_5numpy_double_t;
  * ctypedef npy_cfloat      cfloat_t
  */
 typedef npy_longdouble __pyx_t_5numpy_longdouble_t;
+
+/* "cython_utils/nms.pxd":4
+ * cimport numpy as np
+ * cimport cython
+ * ctypedef np.float_t DTYPE_t             # <<<<<<<<<<<<<<
+ * from libc.math cimport exp
+ * from util.util import BoundBox
+ */
+typedef __pyx_t_5numpy_float_t __pyx_t_12cython_utils_3nms_DTYPE_t;
 /* Declarations.proto */
 #if CYTHON_CCOMPLEX
   #ifdef __cplusplus
@@ -2058,6 +2067,9 @@ static CYTHON_INLINE char __Pyx_PyInt_As_char(PyObject *);
 /* CheckBinaryVersion.proto */
 static int __Pyx_check_binary_version(void);
 
+/* FunctionExport.proto */
+static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig);
+
 /* InitStrings.proto */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
@@ -2223,6 +2235,7 @@ static const char __pyx_k_TypeError[] = "TypeError";
 static const char __pyx_k_enumerate[] = "enumerate";
 static const char __pyx_k_pyx_state[] = "__pyx_state";
 static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
+static const char __pyx_k_util_util[] = "util.util";
 static const char __pyx_k_IndexError[] = "IndexError";
 static const char __pyx_k_ValueError[] = "ValueError";
 static const char __pyx_k_pyx_result[] = "__pyx_result";
@@ -2250,7 +2263,6 @@ static const char __pyx_k_MemoryView_of_r_at_0x_x[] = "<MemoryView of %r at 0x%x
 static const char __pyx_k_contiguous_and_indirect[] = "<contiguous and indirect>";
 static const char __pyx_k_Cannot_index_with_type_s[] = "Cannot index with type '%s'";
 static const char __pyx_k_Invalid_shape_in_axis_d_d[] = "Invalid shape in axis %d: %d.";
-static const char __pyx_k_darkflow_darkflow_utils_box[] = "darkflow.darkflow.utils.box";
 static const char __pyx_k_itemsize_0_for_cython_array[] = "itemsize <= 0 for cython.array";
 static const char __pyx_k_ndarray_is_not_C_contiguous[] = "ndarray is not C contiguous";
 static const char __pyx_k_unable_to_allocate_array_data[] = "unable to allocate array data.";
@@ -2313,7 +2325,6 @@ static PyObject *__pyx_n_s_class;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_kp_s_contiguous_and_direct;
 static PyObject *__pyx_kp_s_contiguous_and_indirect;
-static PyObject *__pyx_n_s_darkflow_darkflow_utils_box;
 static PyObject *__pyx_n_s_dict;
 static PyObject *__pyx_n_s_dtype_is_object;
 static PyObject *__pyx_n_s_encode;
@@ -2378,6 +2389,7 @@ static PyObject *__pyx_kp_s_unable_to_allocate_shape_and_str;
 static PyObject *__pyx_kp_u_unknown_dtype_code_in_numpy_pxd;
 static PyObject *__pyx_n_s_unpack;
 static PyObject *__pyx_n_s_update;
+static PyObject *__pyx_n_s_util_util;
 static PyObject *__pyx_n_s_w;
 static PyObject *__pyx_n_s_x;
 static PyObject *__pyx_n_s_y;
@@ -2467,7 +2479,7 @@ static PyObject *__pyx_tuple__31;
 static PyObject *__pyx_codeobj__32;
 /* Late includes */
 
-/* "cython_utils/nms.pyx":13
+/* "cython_utils/nms.pyx":11
  * @cython.wraparound(False)  # turn off negative index wrapping for entire function
  * @cython.cdivision(True)
  * cdef float overlap_c(float x1, float w1 , float x2 , float w2):             # <<<<<<<<<<<<<<
@@ -2492,7 +2504,7 @@ static float __pyx_f_12cython_utils_3nms_overlap_c(float __pyx_v_x1, float __pyx
   double __pyx_t_6;
   __Pyx_RefNannySetupContext("overlap_c", 0);
 
-  /* "cython_utils/nms.pyx":16
+  /* "cython_utils/nms.pyx":14
  *     cdef:
  *         float l1,l2,left,right
  *     l1 = x1 - w1 /2.             # <<<<<<<<<<<<<<
@@ -2501,7 +2513,7 @@ static float __pyx_f_12cython_utils_3nms_overlap_c(float __pyx_v_x1, float __pyx
  */
   __pyx_v_l1 = (__pyx_v_x1 - (__pyx_v_w1 / 2.));
 
-  /* "cython_utils/nms.pyx":17
+  /* "cython_utils/nms.pyx":15
  *         float l1,l2,left,right
  *     l1 = x1 - w1 /2.
  *     l2 = x2 - w2 /2.             # <<<<<<<<<<<<<<
@@ -2510,7 +2522,7 @@ static float __pyx_f_12cython_utils_3nms_overlap_c(float __pyx_v_x1, float __pyx
  */
   __pyx_v_l2 = (__pyx_v_x2 - (__pyx_v_w2 / 2.));
 
-  /* "cython_utils/nms.pyx":18
+  /* "cython_utils/nms.pyx":16
  *     l1 = x1 - w1 /2.
  *     l2 = x2 - w2 /2.
  *     left = max(l1,l2)             # <<<<<<<<<<<<<<
@@ -2526,7 +2538,7 @@ static float __pyx_f_12cython_utils_3nms_overlap_c(float __pyx_v_x1, float __pyx
   }
   __pyx_v_left = __pyx_t_3;
 
-  /* "cython_utils/nms.pyx":19
+  /* "cython_utils/nms.pyx":17
  *     l2 = x2 - w2 /2.
  *     left = max(l1,l2)
  *     r1 = x1 + w1 /2.             # <<<<<<<<<<<<<<
@@ -2535,7 +2547,7 @@ static float __pyx_f_12cython_utils_3nms_overlap_c(float __pyx_v_x1, float __pyx
  */
   __pyx_v_r1 = (__pyx_v_x1 + (__pyx_v_w1 / 2.));
 
-  /* "cython_utils/nms.pyx":20
+  /* "cython_utils/nms.pyx":18
  *     left = max(l1,l2)
  *     r1 = x1 + w1 /2.
  *     r2 = x2 + w2 /2.             # <<<<<<<<<<<<<<
@@ -2544,7 +2556,7 @@ static float __pyx_f_12cython_utils_3nms_overlap_c(float __pyx_v_x1, float __pyx
  */
   __pyx_v_r2 = (__pyx_v_x2 + (__pyx_v_w2 / 2.));
 
-  /* "cython_utils/nms.pyx":21
+  /* "cython_utils/nms.pyx":19
  *     r1 = x1 + w1 /2.
  *     r2 = x2 + w2 /2.
  *     right = min(r1, r2)             # <<<<<<<<<<<<<<
@@ -2560,7 +2572,7 @@ static float __pyx_f_12cython_utils_3nms_overlap_c(float __pyx_v_x1, float __pyx
   }
   __pyx_v_right = __pyx_t_6;
 
-  /* "cython_utils/nms.pyx":22
+  /* "cython_utils/nms.pyx":20
  *     r2 = x2 + w2 /2.
  *     right = min(r1, r2)
  *     return right - left;             # <<<<<<<<<<<<<<
@@ -2570,7 +2582,7 @@ static float __pyx_f_12cython_utils_3nms_overlap_c(float __pyx_v_x1, float __pyx
   __pyx_r = (__pyx_v_right - __pyx_v_left);
   goto __pyx_L0;
 
-  /* "cython_utils/nms.pyx":13
+  /* "cython_utils/nms.pyx":11
  * @cython.wraparound(False)  # turn off negative index wrapping for entire function
  * @cython.cdivision(True)
  * cdef float overlap_c(float x1, float w1 , float x2 , float w2):             # <<<<<<<<<<<<<<
@@ -2584,7 +2596,7 @@ static float __pyx_f_12cython_utils_3nms_overlap_c(float __pyx_v_x1, float __pyx
   return __pyx_r;
 }
 
-/* "cython_utils/nms.pyx":28
+/* "cython_utils/nms.pyx":26
  * @cython.wraparound(False)  # turn off negative index wrapping for entire function
  * @cython.cdivision(True)
  * cdef float box_intersection_c(float ax, float ay, float aw, float ah, float bx, float by, float bw, float bh):             # <<<<<<<<<<<<<<
@@ -2602,7 +2614,7 @@ static float __pyx_f_12cython_utils_3nms_box_intersection_c(float __pyx_v_ax, fl
   int __pyx_t_2;
   __Pyx_RefNannySetupContext("box_intersection_c", 0);
 
-  /* "cython_utils/nms.pyx":31
+  /* "cython_utils/nms.pyx":29
  *     cdef:
  *         float w,h,area
  *     w = overlap_c(ax, aw, bx, bw)             # <<<<<<<<<<<<<<
@@ -2611,7 +2623,7 @@ static float __pyx_f_12cython_utils_3nms_box_intersection_c(float __pyx_v_ax, fl
  */
   __pyx_v_w = __pyx_f_12cython_utils_3nms_overlap_c(__pyx_v_ax, __pyx_v_aw, __pyx_v_bx, __pyx_v_bw);
 
-  /* "cython_utils/nms.pyx":32
+  /* "cython_utils/nms.pyx":30
  *         float w,h,area
  *     w = overlap_c(ax, aw, bx, bw)
  *     h = overlap_c(ay, ah, by, bh)             # <<<<<<<<<<<<<<
@@ -2620,7 +2632,7 @@ static float __pyx_f_12cython_utils_3nms_box_intersection_c(float __pyx_v_ax, fl
  */
   __pyx_v_h = __pyx_f_12cython_utils_3nms_overlap_c(__pyx_v_ay, __pyx_v_ah, __pyx_v_by, __pyx_v_bh);
 
-  /* "cython_utils/nms.pyx":33
+  /* "cython_utils/nms.pyx":31
  *     w = overlap_c(ax, aw, bx, bw)
  *     h = overlap_c(ay, ah, by, bh)
  *     if w < 0 or h < 0: return 0             # <<<<<<<<<<<<<<
@@ -2641,7 +2653,7 @@ static float __pyx_f_12cython_utils_3nms_box_intersection_c(float __pyx_v_ax, fl
     goto __pyx_L0;
   }
 
-  /* "cython_utils/nms.pyx":34
+  /* "cython_utils/nms.pyx":32
  *     h = overlap_c(ay, ah, by, bh)
  *     if w < 0 or h < 0: return 0
  *     area = w * h             # <<<<<<<<<<<<<<
@@ -2650,7 +2662,7 @@ static float __pyx_f_12cython_utils_3nms_box_intersection_c(float __pyx_v_ax, fl
  */
   __pyx_v_area = (__pyx_v_w * __pyx_v_h);
 
-  /* "cython_utils/nms.pyx":35
+  /* "cython_utils/nms.pyx":33
  *     if w < 0 or h < 0: return 0
  *     area = w * h
  *     return area             # <<<<<<<<<<<<<<
@@ -2660,7 +2672,7 @@ static float __pyx_f_12cython_utils_3nms_box_intersection_c(float __pyx_v_ax, fl
   __pyx_r = __pyx_v_area;
   goto __pyx_L0;
 
-  /* "cython_utils/nms.pyx":28
+  /* "cython_utils/nms.pyx":26
  * @cython.wraparound(False)  # turn off negative index wrapping for entire function
  * @cython.cdivision(True)
  * cdef float box_intersection_c(float ax, float ay, float aw, float ah, float bx, float by, float bw, float bh):             # <<<<<<<<<<<<<<
@@ -2674,7 +2686,7 @@ static float __pyx_f_12cython_utils_3nms_box_intersection_c(float __pyx_v_ax, fl
   return __pyx_r;
 }
 
-/* "cython_utils/nms.pyx":41
+/* "cython_utils/nms.pyx":39
  * @cython.wraparound(False)  # turn off negative index wrapping for entire function
  * @cython.cdivision(True)
  * cdef float box_union_c(float ax, float ay, float aw, float ah, float bx, float by, float bw, float bh):             # <<<<<<<<<<<<<<
@@ -2689,7 +2701,7 @@ static float __pyx_f_12cython_utils_3nms_box_union_c(float __pyx_v_ax, float __p
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("box_union_c", 0);
 
-  /* "cython_utils/nms.pyx":44
+  /* "cython_utils/nms.pyx":42
  *     cdef:
  *         float i,u
  *     i = box_intersection_c(ax, ay, aw, ah, bx, by, bw, bh)             # <<<<<<<<<<<<<<
@@ -2698,7 +2710,7 @@ static float __pyx_f_12cython_utils_3nms_box_union_c(float __pyx_v_ax, float __p
  */
   __pyx_v_i = __pyx_f_12cython_utils_3nms_box_intersection_c(__pyx_v_ax, __pyx_v_ay, __pyx_v_aw, __pyx_v_ah, __pyx_v_bx, __pyx_v_by, __pyx_v_bw, __pyx_v_bh);
 
-  /* "cython_utils/nms.pyx":45
+  /* "cython_utils/nms.pyx":43
  *         float i,u
  *     i = box_intersection_c(ax, ay, aw, ah, bx, by, bw, bh)
  *     u = aw * ah + bw * bh -i             # <<<<<<<<<<<<<<
@@ -2707,7 +2719,7 @@ static float __pyx_f_12cython_utils_3nms_box_union_c(float __pyx_v_ax, float __p
  */
   __pyx_v_u = (((__pyx_v_aw * __pyx_v_ah) + (__pyx_v_bw * __pyx_v_bh)) - __pyx_v_i);
 
-  /* "cython_utils/nms.pyx":46
+  /* "cython_utils/nms.pyx":44
  *     i = box_intersection_c(ax, ay, aw, ah, bx, by, bw, bh)
  *     u = aw * ah + bw * bh -i
  *     return u             # <<<<<<<<<<<<<<
@@ -2717,7 +2729,7 @@ static float __pyx_f_12cython_utils_3nms_box_union_c(float __pyx_v_ax, float __p
   __pyx_r = __pyx_v_u;
   goto __pyx_L0;
 
-  /* "cython_utils/nms.pyx":41
+  /* "cython_utils/nms.pyx":39
  * @cython.wraparound(False)  # turn off negative index wrapping for entire function
  * @cython.cdivision(True)
  * cdef float box_union_c(float ax, float ay, float aw, float ah, float bx, float by, float bw, float bh):             # <<<<<<<<<<<<<<
@@ -2731,7 +2743,7 @@ static float __pyx_f_12cython_utils_3nms_box_union_c(float __pyx_v_ax, float __p
   return __pyx_r;
 }
 
-/* "cython_utils/nms.pyx":53
+/* "cython_utils/nms.pyx":51
  * @cython.wraparound(False)  # turn off negative index wrapping for entire function
  * @cython.cdivision(True)
  * cdef float box_iou_c(float ax, float ay, float aw, float ah, float bx, float by, float bw, float bh):             # <<<<<<<<<<<<<<
@@ -2744,7 +2756,7 @@ static float __pyx_f_12cython_utils_3nms_box_iou_c(float __pyx_v_ax, float __pyx
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("box_iou_c", 0);
 
-  /* "cython_utils/nms.pyx":54
+  /* "cython_utils/nms.pyx":52
  * @cython.cdivision(True)
  * cdef float box_iou_c(float ax, float ay, float aw, float ah, float bx, float by, float bw, float bh):
  *     return box_intersection_c(ax, ay, aw, ah, bx, by, bw, bh) / box_union_c(ax, ay, aw, ah, bx, by, bw, bh);             # <<<<<<<<<<<<<<
@@ -2754,7 +2766,7 @@ static float __pyx_f_12cython_utils_3nms_box_iou_c(float __pyx_v_ax, float __pyx
   __pyx_r = (__pyx_f_12cython_utils_3nms_box_intersection_c(__pyx_v_ax, __pyx_v_ay, __pyx_v_aw, __pyx_v_ah, __pyx_v_bx, __pyx_v_by, __pyx_v_bw, __pyx_v_bh) / __pyx_f_12cython_utils_3nms_box_union_c(__pyx_v_ax, __pyx_v_ay, __pyx_v_aw, __pyx_v_ah, __pyx_v_bx, __pyx_v_by, __pyx_v_bw, __pyx_v_bh));
   goto __pyx_L0;
 
-  /* "cython_utils/nms.pyx":53
+  /* "cython_utils/nms.pyx":51
  * @cython.wraparound(False)  # turn off negative index wrapping for entire function
  * @cython.cdivision(True)
  * cdef float box_iou_c(float ax, float ay, float aw, float ah, float bx, float by, float bw, float bh):             # <<<<<<<<<<<<<<
@@ -2768,7 +2780,7 @@ static float __pyx_f_12cython_utils_3nms_box_iou_c(float __pyx_v_ax, float __pyx
   return __pyx_r;
 }
 
-/* "cython_utils/nms.pyx":63
+/* "cython_utils/nms.pyx":61
  * @cython.wraparound(False)  # turn off negative index wrapping for entire function
  * @cython.cdivision(True)
  * cdef NMS(float[:, ::1] final_probs , float[:, ::1] final_bbox):             # <<<<<<<<<<<<<<
@@ -2844,31 +2856,31 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
   int __pyx_t_55;
   __Pyx_RefNannySetupContext("NMS", 0);
 
-  /* "cython_utils/nms.pyx":64
+  /* "cython_utils/nms.pyx":62
  * @cython.cdivision(True)
  * cdef NMS(float[:, ::1] final_probs , float[:, ::1] final_bbox):
  *     cdef list boxes = list()             # <<<<<<<<<<<<<<
  *     cdef set indices = set()
  *     cdef:
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 64, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_boxes = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cython_utils/nms.pyx":65
+  /* "cython_utils/nms.pyx":63
  * cdef NMS(float[:, ::1] final_probs , float[:, ::1] final_bbox):
  *     cdef list boxes = list()
  *     cdef set indices = set()             # <<<<<<<<<<<<<<
  *     cdef:
  *         np.intp_t pred_length,class_length,class_loop,index,index2
  */
-  __pyx_t_1 = PySet_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_t_1 = PySet_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_indices = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cython_utils/nms.pyx":70
+  /* "cython_utils/nms.pyx":68
  * 
  * 
  *     pred_length = final_bbox.shape[0]             # <<<<<<<<<<<<<<
@@ -2877,7 +2889,7 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
  */
   __pyx_v_pred_length = (__pyx_v_final_bbox.shape[0]);
 
-  /* "cython_utils/nms.pyx":71
+  /* "cython_utils/nms.pyx":69
  * 
  *     pred_length = final_bbox.shape[0]
  *     class_length = final_probs.shape[1]             # <<<<<<<<<<<<<<
@@ -2886,7 +2898,7 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
  */
   __pyx_v_class_length = (__pyx_v_final_probs.shape[1]);
 
-  /* "cython_utils/nms.pyx":72
+  /* "cython_utils/nms.pyx":70
  *     pred_length = final_bbox.shape[0]
  *     class_length = final_probs.shape[1]
  *     for class_loop in range(class_length):             # <<<<<<<<<<<<<<
@@ -2898,7 +2910,7 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_class_loop = __pyx_t_4;
 
-    /* "cython_utils/nms.pyx":73
+    /* "cython_utils/nms.pyx":71
  *     class_length = final_probs.shape[1]
  *     for class_loop in range(class_length):
  *         for index in range(pred_length):             # <<<<<<<<<<<<<<
@@ -2910,7 +2922,7 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
     for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
       __pyx_v_index = __pyx_t_7;
 
-      /* "cython_utils/nms.pyx":74
+      /* "cython_utils/nms.pyx":72
  *     for class_loop in range(class_length):
  *         for index in range(pred_length):
  *             if final_probs[index,class_loop] == 0: continue             # <<<<<<<<<<<<<<
@@ -2924,7 +2936,7 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
         goto __pyx_L5_continue;
       }
 
-      /* "cython_utils/nms.pyx":75
+      /* "cython_utils/nms.pyx":73
  *         for index in range(pred_length):
  *             if final_probs[index,class_loop] == 0: continue
  *             for index2 in range(index+1,pred_length):             # <<<<<<<<<<<<<<
@@ -2936,7 +2948,7 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
       for (__pyx_t_13 = (__pyx_v_index + 1); __pyx_t_13 < __pyx_t_12; __pyx_t_13+=1) {
         __pyx_v_index2 = __pyx_t_13;
 
-        /* "cython_utils/nms.pyx":76
+        /* "cython_utils/nms.pyx":74
  *             if final_probs[index,class_loop] == 0: continue
  *             for index2 in range(index+1,pred_length):
  *                 if final_probs[index2,class_loop] == 0: continue             # <<<<<<<<<<<<<<
@@ -2950,7 +2962,7 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
           goto __pyx_L8_continue;
         }
 
-        /* "cython_utils/nms.pyx":77
+        /* "cython_utils/nms.pyx":75
  *             for index2 in range(index+1,pred_length):
  *                 if final_probs[index2,class_loop] == 0: continue
  *                 if index==index2 : continue             # <<<<<<<<<<<<<<
@@ -2962,7 +2974,7 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
           goto __pyx_L8_continue;
         }
 
-        /* "cython_utils/nms.pyx":78
+        /* "cython_utils/nms.pyx":76
  *                 if final_probs[index2,class_loop] == 0: continue
  *                 if index==index2 : continue
  *                 if box_iou_c(final_bbox[index,0],final_bbox[index,1],final_bbox[index,2],final_bbox[index,3],final_bbox[index2,0],final_bbox[index2,1],final_bbox[index2,2],final_bbox[index2,3]) >= 0.4:             # <<<<<<<<<<<<<<
@@ -2988,7 +3000,7 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
         __pyx_t_10 = ((__pyx_f_12cython_utils_3nms_box_iou_c((*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_bbox.data + __pyx_t_16 * __pyx_v_final_bbox.strides[0]) )) + __pyx_t_17)) ))), (*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_bbox.data + __pyx_t_18 * __pyx_v_final_bbox.strides[0]) )) + __pyx_t_19)) ))), (*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_bbox.data + __pyx_t_20 * __pyx_v_final_bbox.strides[0]) )) + __pyx_t_21)) ))), (*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_bbox.data + __pyx_t_22 * __pyx_v_final_bbox.strides[0]) )) + __pyx_t_23)) ))), (*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_bbox.data + __pyx_t_24 * __pyx_v_final_bbox.strides[0]) )) + __pyx_t_25)) ))), (*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_bbox.data + __pyx_t_26 * __pyx_v_final_bbox.strides[0]) )) + __pyx_t_27)) ))), (*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_bbox.data + __pyx_t_28 * __pyx_v_final_bbox.strides[0]) )) + __pyx_t_29)) ))), (*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_bbox.data + __pyx_t_30 * __pyx_v_final_bbox.strides[0]) )) + __pyx_t_31)) )))) >= 0.4) != 0);
         if (__pyx_t_10) {
 
-          /* "cython_utils/nms.pyx":79
+          /* "cython_utils/nms.pyx":77
  *                 if index==index2 : continue
  *                 if box_iou_c(final_bbox[index,0],final_bbox[index,1],final_bbox[index,2],final_bbox[index,3],final_bbox[index2,0],final_bbox[index2,1],final_bbox[index2,2],final_bbox[index2,3]) >= 0.4:
  *                     if final_probs[index2,class_loop] > final_probs[index, class_loop] :             # <<<<<<<<<<<<<<
@@ -3002,7 +3014,7 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
           __pyx_t_10 = (((*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_probs.data + __pyx_t_32 * __pyx_v_final_probs.strides[0]) )) + __pyx_t_33)) ))) > (*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_probs.data + __pyx_t_34 * __pyx_v_final_probs.strides[0]) )) + __pyx_t_35)) )))) != 0);
           if (__pyx_t_10) {
 
-            /* "cython_utils/nms.pyx":80
+            /* "cython_utils/nms.pyx":78
  *                 if box_iou_c(final_bbox[index,0],final_bbox[index,1],final_bbox[index,2],final_bbox[index,3],final_bbox[index2,0],final_bbox[index2,1],final_bbox[index2,2],final_bbox[index2,3]) >= 0.4:
  *                     if final_probs[index2,class_loop] > final_probs[index, class_loop] :
  *                         final_probs[index, class_loop] =0             # <<<<<<<<<<<<<<
@@ -3013,7 +3025,7 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
             __pyx_t_37 = __pyx_v_class_loop;
             *((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_probs.data + __pyx_t_36 * __pyx_v_final_probs.strides[0]) )) + __pyx_t_37)) )) = 0.0;
 
-            /* "cython_utils/nms.pyx":81
+            /* "cython_utils/nms.pyx":79
  *                     if final_probs[index2,class_loop] > final_probs[index, class_loop] :
  *                         final_probs[index, class_loop] =0
  *                         break             # <<<<<<<<<<<<<<
@@ -3022,7 +3034,7 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
  */
             goto __pyx_L9_break;
 
-            /* "cython_utils/nms.pyx":79
+            /* "cython_utils/nms.pyx":77
  *                 if index==index2 : continue
  *                 if box_iou_c(final_bbox[index,0],final_bbox[index,1],final_bbox[index,2],final_bbox[index,3],final_bbox[index2,0],final_bbox[index2,1],final_bbox[index2,2],final_bbox[index2,3]) >= 0.4:
  *                     if final_probs[index2,class_loop] > final_probs[index, class_loop] :             # <<<<<<<<<<<<<<
@@ -3031,7 +3043,7 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
  */
           }
 
-          /* "cython_utils/nms.pyx":82
+          /* "cython_utils/nms.pyx":80
  *                         final_probs[index, class_loop] =0
  *                         break
  *                     final_probs[index2,class_loop]=0             # <<<<<<<<<<<<<<
@@ -3042,7 +3054,7 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
           __pyx_t_39 = __pyx_v_class_loop;
           *((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_probs.data + __pyx_t_38 * __pyx_v_final_probs.strides[0]) )) + __pyx_t_39)) )) = 0.0;
 
-          /* "cython_utils/nms.pyx":78
+          /* "cython_utils/nms.pyx":76
  *                 if final_probs[index2,class_loop] == 0: continue
  *                 if index==index2 : continue
  *                 if box_iou_c(final_bbox[index,0],final_bbox[index,1],final_bbox[index,2],final_bbox[index,3],final_bbox[index2,0],final_bbox[index2,1],final_bbox[index2,2],final_bbox[index2,3]) >= 0.4:             # <<<<<<<<<<<<<<
@@ -3054,30 +3066,30 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
       }
       __pyx_L9_break:;
 
-      /* "cython_utils/nms.pyx":84
+      /* "cython_utils/nms.pyx":82
  *                     final_probs[index2,class_loop]=0
  * 
  *             if index not in indices:             # <<<<<<<<<<<<<<
  *                 bb=BoundBox(class_length)
  *                 bb.x = final_bbox[index, 0]
  */
-      __pyx_t_1 = __Pyx_PyInt_From_Py_intptr_t(__pyx_v_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 84, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyInt_From_Py_intptr_t(__pyx_v_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_10 = (__Pyx_PySet_ContainsTF(__pyx_t_1, __pyx_v_indices, Py_NE)); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(0, 84, __pyx_L1_error)
+      __pyx_t_10 = (__Pyx_PySet_ContainsTF(__pyx_t_1, __pyx_v_indices, Py_NE)); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(0, 82, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_40 = (__pyx_t_10 != 0);
       if (__pyx_t_40) {
 
-        /* "cython_utils/nms.pyx":85
+        /* "cython_utils/nms.pyx":83
  * 
  *             if index not in indices:
  *                 bb=BoundBox(class_length)             # <<<<<<<<<<<<<<
  *                 bb.x = final_bbox[index, 0]
  *                 bb.y = final_bbox[index, 1]
  */
-        __Pyx_GetModuleGlobalName(__pyx_t_41, __pyx_n_s_BoundBox); if (unlikely(!__pyx_t_41)) __PYX_ERR(0, 85, __pyx_L1_error)
+        __Pyx_GetModuleGlobalName(__pyx_t_41, __pyx_n_s_BoundBox); if (unlikely(!__pyx_t_41)) __PYX_ERR(0, 83, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_41);
-        __pyx_t_42 = __Pyx_PyInt_From_Py_intptr_t(__pyx_v_class_length); if (unlikely(!__pyx_t_42)) __PYX_ERR(0, 85, __pyx_L1_error)
+        __pyx_t_42 = __Pyx_PyInt_From_Py_intptr_t(__pyx_v_class_length); if (unlikely(!__pyx_t_42)) __PYX_ERR(0, 83, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_42);
         __pyx_t_43 = NULL;
         if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_41))) {
@@ -3092,13 +3104,13 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
         __pyx_t_1 = (__pyx_t_43) ? __Pyx_PyObject_Call2Args(__pyx_t_41, __pyx_t_43, __pyx_t_42) : __Pyx_PyObject_CallOneArg(__pyx_t_41, __pyx_t_42);
         __Pyx_XDECREF(__pyx_t_43); __pyx_t_43 = 0;
         __Pyx_DECREF(__pyx_t_42); __pyx_t_42 = 0;
-        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
+        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_41); __pyx_t_41 = 0;
         __Pyx_XDECREF_SET(__pyx_v_bb, __pyx_t_1);
         __pyx_t_1 = 0;
 
-        /* "cython_utils/nms.pyx":86
+        /* "cython_utils/nms.pyx":84
  *             if index not in indices:
  *                 bb=BoundBox(class_length)
  *                 bb.x = final_bbox[index, 0]             # <<<<<<<<<<<<<<
@@ -3107,12 +3119,12 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
  */
         __pyx_t_44 = __pyx_v_index;
         __pyx_t_45 = 0;
-        __pyx_t_1 = PyFloat_FromDouble((*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_bbox.data + __pyx_t_44 * __pyx_v_final_bbox.strides[0]) )) + __pyx_t_45)) )))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
+        __pyx_t_1 = PyFloat_FromDouble((*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_bbox.data + __pyx_t_44 * __pyx_v_final_bbox.strides[0]) )) + __pyx_t_45)) )))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 84, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
-        if (__Pyx_PyObject_SetAttrStr(__pyx_v_bb, __pyx_n_s_x, __pyx_t_1) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
+        if (__Pyx_PyObject_SetAttrStr(__pyx_v_bb, __pyx_n_s_x, __pyx_t_1) < 0) __PYX_ERR(0, 84, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "cython_utils/nms.pyx":87
+        /* "cython_utils/nms.pyx":85
  *                 bb=BoundBox(class_length)
  *                 bb.x = final_bbox[index, 0]
  *                 bb.y = final_bbox[index, 1]             # <<<<<<<<<<<<<<
@@ -3121,12 +3133,12 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
  */
         __pyx_t_46 = __pyx_v_index;
         __pyx_t_47 = 1;
-        __pyx_t_1 = PyFloat_FromDouble((*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_bbox.data + __pyx_t_46 * __pyx_v_final_bbox.strides[0]) )) + __pyx_t_47)) )))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
+        __pyx_t_1 = PyFloat_FromDouble((*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_bbox.data + __pyx_t_46 * __pyx_v_final_bbox.strides[0]) )) + __pyx_t_47)) )))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
-        if (__Pyx_PyObject_SetAttrStr(__pyx_v_bb, __pyx_n_s_y, __pyx_t_1) < 0) __PYX_ERR(0, 87, __pyx_L1_error)
+        if (__Pyx_PyObject_SetAttrStr(__pyx_v_bb, __pyx_n_s_y, __pyx_t_1) < 0) __PYX_ERR(0, 85, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "cython_utils/nms.pyx":88
+        /* "cython_utils/nms.pyx":86
  *                 bb.x = final_bbox[index, 0]
  *                 bb.y = final_bbox[index, 1]
  *                 bb.w = final_bbox[index, 2]             # <<<<<<<<<<<<<<
@@ -3135,12 +3147,12 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
  */
         __pyx_t_48 = __pyx_v_index;
         __pyx_t_49 = 2;
-        __pyx_t_1 = PyFloat_FromDouble((*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_bbox.data + __pyx_t_48 * __pyx_v_final_bbox.strides[0]) )) + __pyx_t_49)) )))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+        __pyx_t_1 = PyFloat_FromDouble((*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_bbox.data + __pyx_t_48 * __pyx_v_final_bbox.strides[0]) )) + __pyx_t_49)) )))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
-        if (__Pyx_PyObject_SetAttrStr(__pyx_v_bb, __pyx_n_s_w, __pyx_t_1) < 0) __PYX_ERR(0, 88, __pyx_L1_error)
+        if (__Pyx_PyObject_SetAttrStr(__pyx_v_bb, __pyx_n_s_w, __pyx_t_1) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "cython_utils/nms.pyx":89
+        /* "cython_utils/nms.pyx":87
  *                 bb.y = final_bbox[index, 1]
  *                 bb.w = final_bbox[index, 2]
  *                 bb.h = final_bbox[index, 3]             # <<<<<<<<<<<<<<
@@ -3149,12 +3161,12 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
  */
         __pyx_t_50 = __pyx_v_index;
         __pyx_t_51 = 3;
-        __pyx_t_1 = PyFloat_FromDouble((*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_bbox.data + __pyx_t_50 * __pyx_v_final_bbox.strides[0]) )) + __pyx_t_51)) )))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+        __pyx_t_1 = PyFloat_FromDouble((*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_bbox.data + __pyx_t_50 * __pyx_v_final_bbox.strides[0]) )) + __pyx_t_51)) )))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
-        if (__Pyx_PyObject_SetAttrStr(__pyx_v_bb, __pyx_n_s_h, __pyx_t_1) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
+        if (__Pyx_PyObject_SetAttrStr(__pyx_v_bb, __pyx_n_s_h, __pyx_t_1) < 0) __PYX_ERR(0, 87, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "cython_utils/nms.pyx":90
+        /* "cython_utils/nms.pyx":88
  *                 bb.w = final_bbox[index, 2]
  *                 bb.h = final_bbox[index, 3]
  *                 bb.c = final_bbox[index, 4]             # <<<<<<<<<<<<<<
@@ -3163,21 +3175,21 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
  */
         __pyx_t_52 = __pyx_v_index;
         __pyx_t_53 = 4;
-        __pyx_t_1 = PyFloat_FromDouble((*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_bbox.data + __pyx_t_52 * __pyx_v_final_bbox.strides[0]) )) + __pyx_t_53)) )))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
+        __pyx_t_1 = PyFloat_FromDouble((*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_final_bbox.data + __pyx_t_52 * __pyx_v_final_bbox.strides[0]) )) + __pyx_t_53)) )))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
-        if (__Pyx_PyObject_SetAttrStr(__pyx_v_bb, __pyx_n_s_c, __pyx_t_1) < 0) __PYX_ERR(0, 90, __pyx_L1_error)
+        if (__Pyx_PyObject_SetAttrStr(__pyx_v_bb, __pyx_n_s_c, __pyx_t_1) < 0) __PYX_ERR(0, 88, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "cython_utils/nms.pyx":91
+        /* "cython_utils/nms.pyx":89
  *                 bb.h = final_bbox[index, 3]
  *                 bb.c = final_bbox[index, 4]
  *                 bb.probs = np.asarray(final_probs[index,:])             # <<<<<<<<<<<<<<
  *                 boxes.append(bb)
  *                 indices.add(index)
  */
-        __Pyx_GetModuleGlobalName(__pyx_t_41, __pyx_n_s_np); if (unlikely(!__pyx_t_41)) __PYX_ERR(0, 91, __pyx_L1_error)
+        __Pyx_GetModuleGlobalName(__pyx_t_41, __pyx_n_s_np); if (unlikely(!__pyx_t_41)) __PYX_ERR(0, 89, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_41);
-        __pyx_t_42 = __Pyx_PyObject_GetAttrStr(__pyx_t_41, __pyx_n_s_asarray); if (unlikely(!__pyx_t_42)) __PYX_ERR(0, 91, __pyx_L1_error)
+        __pyx_t_42 = __Pyx_PyObject_GetAttrStr(__pyx_t_41, __pyx_n_s_asarray); if (unlikely(!__pyx_t_42)) __PYX_ERR(0, 89, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_42);
         __Pyx_DECREF(__pyx_t_41); __pyx_t_41 = 0;
         __pyx_t_54.data = __pyx_v_final_probs.data;
@@ -3191,7 +3203,7 @@ static PyObject *__pyx_f_12cython_utils_3nms_NMS(__Pyx_memviewslice __pyx_v_fina
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && !__Pyx_is_valid_index(__pyx_tmp_idx, __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 91, __pyx_L1_error)
+        __PYX_ERR(0, 89, __pyx_L1_error)
     }
         __pyx_t_54.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3200,7 +3212,7 @@ __pyx_t_54.shape[0] = __pyx_v_final_probs.shape[1];
 __pyx_t_54.strides[0] = __pyx_v_final_probs.strides[1];
     __pyx_t_54.suboffsets[0] = -1;
 
-__pyx_t_41 = __pyx_memoryview_fromslice(__pyx_t_54, 1, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_41)) __PYX_ERR(0, 91, __pyx_L1_error)
+__pyx_t_41 = __pyx_memoryview_fromslice(__pyx_t_54, 1, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_41)) __PYX_ERR(0, 89, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_41);
         __PYX_XDEC_MEMVIEW(&__pyx_t_54, 1);
         __pyx_t_54.memview = NULL;
@@ -3218,34 +3230,34 @@ __pyx_t_41 = __pyx_memoryview_fromslice(__pyx_t_54, 1, (PyObject *(*)(char *)) _
         __pyx_t_1 = (__pyx_t_43) ? __Pyx_PyObject_Call2Args(__pyx_t_42, __pyx_t_43, __pyx_t_41) : __Pyx_PyObject_CallOneArg(__pyx_t_42, __pyx_t_41);
         __Pyx_XDECREF(__pyx_t_43); __pyx_t_43 = 0;
         __Pyx_DECREF(__pyx_t_41); __pyx_t_41 = 0;
-        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
+        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_42); __pyx_t_42 = 0;
-        if (__Pyx_PyObject_SetAttrStr(__pyx_v_bb, __pyx_n_s_probs, __pyx_t_1) < 0) __PYX_ERR(0, 91, __pyx_L1_error)
+        if (__Pyx_PyObject_SetAttrStr(__pyx_v_bb, __pyx_n_s_probs, __pyx_t_1) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "cython_utils/nms.pyx":92
+        /* "cython_utils/nms.pyx":90
  *                 bb.c = final_bbox[index, 4]
  *                 bb.probs = np.asarray(final_probs[index,:])
  *                 boxes.append(bb)             # <<<<<<<<<<<<<<
  *                 indices.add(index)
  *     return boxes
  */
-        __pyx_t_55 = __Pyx_PyList_Append(__pyx_v_boxes, __pyx_v_bb); if (unlikely(__pyx_t_55 == ((int)-1))) __PYX_ERR(0, 92, __pyx_L1_error)
+        __pyx_t_55 = __Pyx_PyList_Append(__pyx_v_boxes, __pyx_v_bb); if (unlikely(__pyx_t_55 == ((int)-1))) __PYX_ERR(0, 90, __pyx_L1_error)
 
-        /* "cython_utils/nms.pyx":93
+        /* "cython_utils/nms.pyx":91
  *                 bb.probs = np.asarray(final_probs[index,:])
  *                 boxes.append(bb)
  *                 indices.add(index)             # <<<<<<<<<<<<<<
  *     return boxes
  * 
  */
-        __pyx_t_1 = __Pyx_PyInt_From_Py_intptr_t(__pyx_v_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyInt_From_Py_intptr_t(__pyx_v_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_55 = PySet_Add(__pyx_v_indices, __pyx_t_1); if (unlikely(__pyx_t_55 == ((int)-1))) __PYX_ERR(0, 93, __pyx_L1_error)
+        __pyx_t_55 = PySet_Add(__pyx_v_indices, __pyx_t_1); if (unlikely(__pyx_t_55 == ((int)-1))) __PYX_ERR(0, 91, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "cython_utils/nms.pyx":84
+        /* "cython_utils/nms.pyx":82
  *                     final_probs[index2,class_loop]=0
  * 
  *             if index not in indices:             # <<<<<<<<<<<<<<
@@ -3257,7 +3269,7 @@ __pyx_t_41 = __pyx_memoryview_fromslice(__pyx_t_54, 1, (PyObject *(*)(char *)) _
     }
   }
 
-  /* "cython_utils/nms.pyx":94
+  /* "cython_utils/nms.pyx":92
  *                 boxes.append(bb)
  *                 indices.add(index)
  *     return boxes             # <<<<<<<<<<<<<<
@@ -3269,7 +3281,7 @@ __pyx_t_41 = __pyx_memoryview_fromslice(__pyx_t_54, 1, (PyObject *(*)(char *)) _
   __pyx_r = __pyx_v_boxes;
   goto __pyx_L0;
 
-  /* "cython_utils/nms.pyx":63
+  /* "cython_utils/nms.pyx":61
  * @cython.wraparound(False)  # turn off negative index wrapping for entire function
  * @cython.cdivision(True)
  * cdef NMS(float[:, ::1] final_probs , float[:, ::1] final_bbox):             # <<<<<<<<<<<<<<
@@ -19240,7 +19252,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_kp_s_contiguous_and_direct, __pyx_k_contiguous_and_direct, sizeof(__pyx_k_contiguous_and_direct), 0, 0, 1, 0},
   {&__pyx_kp_s_contiguous_and_indirect, __pyx_k_contiguous_and_indirect, sizeof(__pyx_k_contiguous_and_indirect), 0, 0, 1, 0},
-  {&__pyx_n_s_darkflow_darkflow_utils_box, __pyx_k_darkflow_darkflow_utils_box, sizeof(__pyx_k_darkflow_darkflow_utils_box), 0, 0, 1, 1},
   {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
   {&__pyx_n_s_dtype_is_object, __pyx_k_dtype_is_object, sizeof(__pyx_k_dtype_is_object), 0, 0, 1, 1},
   {&__pyx_n_s_encode, __pyx_k_encode, sizeof(__pyx_k_encode), 0, 0, 1, 1},
@@ -19305,13 +19316,14 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_u_unknown_dtype_code_in_numpy_pxd, __pyx_k_unknown_dtype_code_in_numpy_pxd, sizeof(__pyx_k_unknown_dtype_code_in_numpy_pxd), 0, 1, 0, 0},
   {&__pyx_n_s_unpack, __pyx_k_unpack, sizeof(__pyx_k_unpack), 0, 0, 1, 1},
   {&__pyx_n_s_update, __pyx_k_update, sizeof(__pyx_k_update), 0, 0, 1, 1},
+  {&__pyx_n_s_util_util, __pyx_k_util_util, sizeof(__pyx_k_util_util), 0, 0, 1, 1},
   {&__pyx_n_s_w, __pyx_k_w, sizeof(__pyx_k_w), 0, 0, 1, 1},
   {&__pyx_n_s_x, __pyx_k_x, sizeof(__pyx_k_x), 0, 0, 1, 1},
   {&__pyx_n_s_y, __pyx_k_y, sizeof(__pyx_k_y), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 70, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 272, __pyx_L1_error)
   __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) __PYX_ERR(1, 856, __pyx_L1_error)
   __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(1, 1038, __pyx_L1_error)
@@ -19756,8 +19768,12 @@ static int __Pyx_modinit_function_export_code(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_export_code", 0);
   /*--- Function export code ---*/
+  if (__Pyx_ExportFunction("NMS", (void (*)(void))__pyx_f_12cython_utils_3nms_NMS, "PyObject *(__Pyx_memviewslice, __Pyx_memviewslice)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
+  __pyx_L1_error:;
+  __Pyx_RefNannyFinishContext();
+  return -1;
 }
 
 static int __Pyx_modinit_type_init_code(void) {
@@ -20055,7 +20071,7 @@ if (!__Pyx_RefNanny) {
   /*--- Global type/function init code ---*/
   (void)__Pyx_modinit_global_init_code();
   (void)__Pyx_modinit_variable_export_code();
-  (void)__Pyx_modinit_function_export_code();
+  if (unlikely(__Pyx_modinit_function_export_code() != 0)) goto __pyx_L1_error;
   if (unlikely(__Pyx_modinit_type_init_code() != 0)) goto __pyx_L1_error;
   if (unlikely(__Pyx_modinit_type_import_code() != 0)) goto __pyx_L1_error;
   (void)__Pyx_modinit_variable_import_code();
@@ -20078,16 +20094,16 @@ if (!__Pyx_RefNanny) {
   /* "cython_utils/nms.pyx":5
  * cimport cython
  * from libc.math cimport exp
- * from darkflow.darkflow.utils.box import BoundBox             # <<<<<<<<<<<<<<
+ * from util.util import BoundBox             # <<<<<<<<<<<<<<
  * 
- * 
+ * #OVERLAP
  */
   __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_BoundBox);
   __Pyx_GIVEREF(__pyx_n_s_BoundBox);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_BoundBox);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_darkflow_darkflow_utils_box, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_util_util, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_BoundBox); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 5, __pyx_L1_error)
@@ -23933,6 +23949,43 @@ static int __Pyx_check_binary_version(void) {
         return PyErr_WarnEx(NULL, message, 1);
     }
     return 0;
+}
+
+/* FunctionExport */
+static int __Pyx_ExportFunction(const char *name, void (*f)(void), const char *sig) {
+    PyObject *d = 0;
+    PyObject *cobj = 0;
+    union {
+        void (*fp)(void);
+        void *p;
+    } tmp;
+    d = PyObject_GetAttrString(__pyx_m, (char *)"__pyx_capi__");
+    if (!d) {
+        PyErr_Clear();
+        d = PyDict_New();
+        if (!d)
+            goto bad;
+        Py_INCREF(d);
+        if (PyModule_AddObject(__pyx_m, (char *)"__pyx_capi__", d) < 0)
+            goto bad;
+    }
+    tmp.fp = f;
+#if PY_VERSION_HEX >= 0x02070000
+    cobj = PyCapsule_New(tmp.p, sig, 0);
+#else
+    cobj = PyCObject_FromVoidPtrAndDesc(tmp.p, (void *)sig, 0);
+#endif
+    if (!cobj)
+        goto bad;
+    if (PyDict_SetItemString(d, name, cobj) < 0)
+        goto bad;
+    Py_DECREF(cobj);
+    Py_DECREF(d);
+    return 0;
+bad:
+    Py_XDECREF(cobj);
+    Py_XDECREF(d);
+    return -1;
 }
 
 /* InitStrings */

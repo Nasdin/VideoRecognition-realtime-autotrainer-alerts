@@ -1172,16 +1172,16 @@ typedef npy_longdouble __pyx_t_5numpy_longdouble_t;
  * cimport cython
  * ctypedef np.float_t DTYPE_t             # <<<<<<<<<<<<<<
  * from libc.math cimport exp
- * from darkflow.darkflow.utils.box import BoundBox
+ * from util.util import BoundBox
  */
-typedef __pyx_t_5numpy_float_t __pyx_t_3nms_DTYPE_t;
+typedef __pyx_t_5numpy_float_t __pyx_t_12cython_utils_3nms_DTYPE_t;
 
 /* "cython_utils/cy_yolo2_findboxes.pyx":4
  * cimport numpy as np
  * cimport cython
  * ctypedef np.float_t DTYPE_t             # <<<<<<<<<<<<<<
  * from libc.math cimport exp
- * from darkflow.darkflow.utils.box import BoundBox
+ * from util.util import BoundBox
  */
 typedef __pyx_t_5numpy_float_t __pyx_t_12cython_utils_18cy_yolo2_findboxes_DTYPE_t;
 /* Declarations.proto */
@@ -2163,8 +2163,8 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *, cha
 
 /* Module declarations from 'libc.math' */
 
-/* Module declarations from 'nms' */
-static PyObject *(*__pyx_f_3nms_NMS)(__Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
+/* Module declarations from 'cython_utils.nms' */
+static PyObject *(*__pyx_f_12cython_utils_3nms_NMS)(__Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
 
 /* Module declarations from 'cython_utils.cy_yolo2_findboxes' */
 static PyTypeObject *__pyx_array_type = 0;
@@ -2309,6 +2309,7 @@ static const char __pyx_k_enumerate[] = "enumerate";
 static const char __pyx_k_pyx_state[] = "__pyx_state";
 static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
 static const char __pyx_k_threshold[] = "threshold";
+static const char __pyx_k_util_util[] = "util.util";
 static const char __pyx_k_IndexError[] = "IndexError";
 static const char __pyx_k_ValueError[] = "ValueError";
 static const char __pyx_k_class_loop[] = "class_loop";
@@ -2340,7 +2341,6 @@ static const char __pyx_k_MemoryView_of_r_at_0x_x[] = "<MemoryView of %r at 0x%x
 static const char __pyx_k_contiguous_and_indirect[] = "<contiguous and indirect>";
 static const char __pyx_k_Cannot_index_with_type_s[] = "Cannot index with type '%s'";
 static const char __pyx_k_Invalid_shape_in_axis_d_d[] = "Invalid shape in axis %d: %d.";
-static const char __pyx_k_darkflow_darkflow_utils_box[] = "darkflow.darkflow.utils.box";
 static const char __pyx_k_itemsize_0_for_cython_array[] = "itemsize <= 0 for cython.array";
 static const char __pyx_k_ndarray_is_not_C_contiguous[] = "ndarray is not C contiguous";
 static const char __pyx_k_unable_to_allocate_array_data[] = "unable to allocate array data.";
@@ -2425,7 +2425,6 @@ static PyObject *__pyx_kp_s_contiguous_and_direct;
 static PyObject *__pyx_kp_s_contiguous_and_indirect;
 static PyObject *__pyx_kp_s_cython_utils_cy_yolo2_findboxes;
 static PyObject *__pyx_n_s_cython_utils_cy_yolo2_findboxes_2;
-static PyObject *__pyx_n_s_darkflow_darkflow_utils_box;
 static PyObject *__pyx_n_s_dict;
 static PyObject *__pyx_n_s_dtype;
 static PyObject *__pyx_n_s_dtype_is_object;
@@ -2505,6 +2504,7 @@ static PyObject *__pyx_kp_s_unable_to_allocate_shape_and_str;
 static PyObject *__pyx_kp_u_unknown_dtype_code_in_numpy_pxd;
 static PyObject *__pyx_n_s_unpack;
 static PyObject *__pyx_n_s_update;
+static PyObject *__pyx_n_s_util_util;
 static PyObject *__pyx_n_s_zeros;
 static PyObject *__pyx_pf_12cython_utils_18cy_yolo2_findboxes_box_constructor(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_meta, PyArrayObject *__pyx_v_net_out_in); /* proto */
 static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
@@ -3725,7 +3725,7 @@ __pyx_v_Bbox_pred = __pyx_t_14;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_t_97 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(__pyx_t_13, PyBUF_WRITABLE); if (unlikely(!__pyx_t_97.memview)) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-  __pyx_t_13 = __pyx_f_3nms_NMS(__pyx_t_96, __pyx_t_97); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 97, __pyx_L1_error)
+  __pyx_t_13 = __pyx_f_12cython_utils_3nms_NMS(__pyx_t_96, __pyx_t_97); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __PYX_XDEC_MEMVIEW(&__pyx_t_96, 1);
   __pyx_t_96.memview = NULL;
@@ -19746,7 +19746,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_contiguous_and_indirect, __pyx_k_contiguous_and_indirect, sizeof(__pyx_k_contiguous_and_indirect), 0, 0, 1, 0},
   {&__pyx_kp_s_cython_utils_cy_yolo2_findboxes, __pyx_k_cython_utils_cy_yolo2_findboxes, sizeof(__pyx_k_cython_utils_cy_yolo2_findboxes), 0, 0, 1, 0},
   {&__pyx_n_s_cython_utils_cy_yolo2_findboxes_2, __pyx_k_cython_utils_cy_yolo2_findboxes_2, sizeof(__pyx_k_cython_utils_cy_yolo2_findboxes_2), 0, 0, 1, 1},
-  {&__pyx_n_s_darkflow_darkflow_utils_box, __pyx_k_darkflow_darkflow_utils_box, sizeof(__pyx_k_darkflow_darkflow_utils_box), 0, 0, 1, 1},
   {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
   {&__pyx_n_s_dtype, __pyx_k_dtype, sizeof(__pyx_k_dtype), 0, 0, 1, 1},
   {&__pyx_n_s_dtype_is_object, __pyx_k_dtype_is_object, sizeof(__pyx_k_dtype_is_object), 0, 0, 1, 1},
@@ -19826,6 +19825,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_u_unknown_dtype_code_in_numpy_pxd, __pyx_k_unknown_dtype_code_in_numpy_pxd, sizeof(__pyx_k_unknown_dtype_code_in_numpy_pxd), 0, 1, 0, 0},
   {&__pyx_n_s_unpack, __pyx_k_unpack, sizeof(__pyx_k_unpack), 0, 0, 1, 1},
   {&__pyx_n_s_update, __pyx_k_update, sizeof(__pyx_k_update), 0, 0, 1, 1},
+  {&__pyx_n_s_util_util, __pyx_k_util_util, sizeof(__pyx_k_util_util), 0, 0, 1, 1},
   {&__pyx_n_s_zeros, __pyx_k_zeros, sizeof(__pyx_k_zeros), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
@@ -20396,8 +20396,8 @@ static int __Pyx_modinit_function_import_code(void) {
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_import_code", 0);
   /*--- Function import code ---*/
-  __pyx_t_1 = PyImport_ImportModule("nms"); if (!__pyx_t_1) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (__Pyx_ImportFunction(__pyx_t_1, "NMS", (void (**)(void))&__pyx_f_3nms_NMS, "PyObject *(__Pyx_memviewslice, __Pyx_memviewslice)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule("cython_utils.nms"); if (!__pyx_t_1) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ImportFunction(__pyx_t_1, "NMS", (void (**)(void))&__pyx_f_12cython_utils_3nms_NMS, "PyObject *(__Pyx_memviewslice, __Pyx_memviewslice)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   Py_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -20618,7 +20618,7 @@ if (!__Pyx_RefNanny) {
   /* "cython_utils/cy_yolo2_findboxes.pyx":6
  * ctypedef np.float_t DTYPE_t
  * from libc.math cimport exp
- * from darkflow.darkflow.utils.box import BoundBox             # <<<<<<<<<<<<<<
+ * from util.util import BoundBox             # <<<<<<<<<<<<<<
  * from nms cimport NMS
  * 
  */
@@ -20627,7 +20627,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(__pyx_n_s_BoundBox);
   __Pyx_GIVEREF(__pyx_n_s_BoundBox);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_BoundBox);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_darkflow_darkflow_utils_box, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_util_util, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_BoundBox); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 6, __pyx_L1_error)
