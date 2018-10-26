@@ -52,7 +52,7 @@ Edit the parameters in train.py and then in batch type:
 #### Testing/Using
 Usage:
 
-	python run.py "path_to_video_file" -g -s "test.avi"
+	python run.py path_to_video_file -g -s test.avi
 	
 Explanation
 Whether to use a video file, supply path
