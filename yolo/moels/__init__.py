@@ -1,10 +1,7 @@
-from . import train
-from . import predict
-from . import data
-from . import misc
 import numpy as np
 
-""" YOLO framework __init__ equivalent"""
+from darkflow.darkflow.net.yolo import misc
+
 
 def constructor(self, meta, FLAGS):
 

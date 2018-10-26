@@ -2,7 +2,7 @@ from util.defaults import argHandler
 from config import MODEL_CFG_FILE_PATH, MODEL_WEIGHT
 from collections import namedtuple
 import os
-from darkflow.darkflow.net.build import TFNet
+from yolo.build import TFNet
 
 UserRunInput = namedtuple("UserRunInputs",
                           ['use_gpu', 'use_video', 'use_camera', 'video_path', 'save', 'save_video_fp'])

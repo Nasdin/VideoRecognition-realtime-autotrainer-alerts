@@ -1,8 +1,0 @@
-tensorflow==1.4.1
-pytest
-requests
-opencv-python
-numpy
-Cython
-codecov
-pytest-cov

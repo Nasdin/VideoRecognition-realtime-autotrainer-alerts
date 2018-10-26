@@ -1,6 +1,7 @@
-from . import yolo
-from . import yolov2
-from . import vanilla
+import yolo.moels
+from darkflow.darkflow.net import yolo
+from darkflow.darkflow.net import yolov2
+from darkflow.darkflow.net import vanilla
 from os.path import basename
 
 class framework(object):
@@ -18,7 +19,7 @@ class framework(object):
         return True
 
 class YOLO(framework):
-    constructor = yolo.constructor
+    constructor = yolo.moels.constructor
     parse = yolo.data.parse
     shuffle = yolo.data.shuffle
     preprocess = yolo.predict.preprocess
@@ -32,7 +33,7 @@ class YOLO(framework):
     process_box = yolo.predict.process_box
 
 class YOLOv2(framework):
-    constructor = yolo.constructor
+    constructor = yolo.moels.constructor
     parse = yolo.data.parse
     shuffle = yolov2.data.shuffle
     preprocess = yolo.predict.preprocess

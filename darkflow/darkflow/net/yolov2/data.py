@@ -1,9 +1,4 @@
-from ...utils.pascal_voc_clean_xml import pascal_voc_clean_xml
-from numpy.random import permutation as perm
-from ..yolo.predict import preprocess
-from ..yolo.data import shuffle
 from copy import deepcopy
-import pickle
 import numpy as np
 import os
 

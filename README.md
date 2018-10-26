@@ -47,18 +47,26 @@ Edit the parameters in train.py and then in batch type:
 
 		python train.py -g
 
--g : Whether to use GPU
+
+	-g : Whether to use GPU
+	-e #: Epochs (optional)
+	-s #: Save Rate (optional)
+	-e #: Epochs (optional)
+	-lr #: Learning Rate (optional)
+	-b #: Batch (optional)
+
 
 #### Testing/Using
 Usage:
 
-	python run.py path_to_video_file -g -s test.avi
+	python run.py "path_to_video_file" -g -s "test.avi"
 	
-Explanation
-Whether to use a video file, supply path
-If not video file, assume to use camera feed.
--g /--gpu : Optional, whether to use GPU ( Defaults to config)
--s /--save: Optional, whether to save results to a video file and where (Defaults to config)
+#### Explanation
+
+	Whether to use a video file, supply path
+	If not video file, assume to use camera feed.
+	-g /--gpu : Optional, whether to use GPU ( Defaults to config)
+	-s /--save: Optional, whether to save results to a video file and where (Defaults to config)
 
 ### Configs
 

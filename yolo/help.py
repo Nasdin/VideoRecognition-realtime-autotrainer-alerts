@@ -1,10 +1,9 @@
 """
 tfnet secondary (helper) methods
 """
-from ..utils.loader import create_loader
+from yolo.darkflow.loader import create_loader
 from time import time as timer
 import tensorflow as tf
-import numpy as np
 import sys
 import cv2
 import os

@@ -1,11 +1,9 @@
 import tensorflow as tf
 import time
-from . import help
-from . import flow
-from .ops import op_create, identity
-from .ops import HEADER, LINE
-from .framework import create_framework
-from ..dark.darknet import Darknet
+from yolo import help, flow, op_create, identity
+from yolo.net.baseop import LINE, HEADER
+from yolo.framework import create_framework
+from yolo.darkflow.darknet import Darknet
 import json
 import os
 

@@ -1,10 +1,6 @@
-import tensorflow.contrib.slim as slim
-import pickle
 import tensorflow as tf
-from ..yolo.misc import show
 import numpy as np
-import os
-import math
+
 
 def expit_tensor(x):
 	return 1. / (1. + tf.exp(-x))
