@@ -1,4 +1,3 @@
-import yolo.moels
 from darkflow.darkflow.net import yolo
 from darkflow.darkflow.net import yolov2
 from darkflow.darkflow.net import vanilla

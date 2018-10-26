@@ -1,9 +1,6 @@
 import tensorflow.contrib.slim as slim
-import pickle
 import tensorflow as tf
-from .misc import show
-import numpy as np
-import os
+
 
 def loss(self, net_out):
     """

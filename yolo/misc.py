@@ -4,25 +4,26 @@ import cv2
 import os
 
 labels20 = ["aeroplane", "bicycle", "bird", "boat", "bottle",
-    "bus", "car", "cat", "chair", "cow", "diningtable", "dog",
-    "horse", "motorbike", "person", "pottedplant", "sheep", "sofa",
-    "train", "tvmonitor"]
+            "bus", "car", "cat", "chair", "cow", "diningtable", "dog",
+            "horse", "motorbike", "person", "pottedplant", "sheep", "sofa",
+            "train", "tvmonitor"]
 
 # 8, 14, 15, 19
 
 voc_models = ['yolo-full', 'yolo-tiny', 'yolo-small',  # <- v1
-              'yolov1', 'tiny-yolov1', # <- v1.1 
-              'tiny-yolo-voc', 'yolo-voc'] # <- v2
+              'yolov1', 'tiny-yolov1',  # <- v1.1
+              'tiny-yolo-voc', 'yolo-voc']  # <- v2
 
 coco_models = ['tiny-coco', 'yolo-coco',  # <- v1.1
-               'yolo', 'tiny-yolo'] # <- v2
+               'yolo', 'tiny-yolo']  # <- v2
 
 coco_names = 'coco.names'
 nine_names = '9k.names'
 
-def labels(meta, FLAGS):    
+
+def labels(meta, FLAGS):
     model = os.path.basename(meta['name'])
-    if model in voc_models: 
+    if model in voc_models:
         print("Model has a VOC model name, loading VOC labels.")
         meta['labels'] = labels20
     else:
@@ -39,11 +40,13 @@ def labels(meta, FLAGS):
             for lab in labs:
                 if lab == '----': break
                 meta['labels'] += [lab]
-    if len(meta['labels']) == 0: 
+    if len(meta['labels']) == 0:
         meta['labels'] = labels20
 
-def is_inp(self, name): 
+
+def is_inp(self, name):
     return name.lower().endswith(('.jpg', '.jpeg', '.png'))
+
 
 def show(im, allobj, S, w, h, cellx, celly):
     for obj in allobj:
@@ -53,28 +56,30 @@ def show(im, allobj, S, w, h, cellx, celly):
         cy = b + obj[2]
         centerx = cx * cellx
         centery = cy * celly
-        ww = obj[3]**2 * w
-        hh = obj[4]**2 * h
+        ww = obj[3] ** 2 * w
+        hh = obj[4] ** 2 * h
         cv2.rectangle(im,
-            (int(centerx - ww/2), int(centery - hh/2)),
-            (int(centerx + ww/2), int(centery + hh/2)),
-            (0,0,255), 2)
+                      (int(centerx - ww / 2), int(centery - hh / 2)),
+                      (int(centerx + ww / 2), int(centery + hh / 2)),
+                      (0, 0, 255), 2)
     cv2.imshow('result', im)
     cv2.waitKey()
     cv2.destroyAllWindows()
 
+
 def show2(im, allobj):
     for obj in allobj:
         cv2.rectangle(im,
-            (obj[1], obj[2]), 
-            (obj[3], obj[4]), 
-            (0,0,255),2)
+                      (obj[1], obj[2]),
+                      (obj[3], obj[4]),
+                      (0, 0, 255), 2)
     cv2.imshow('result', im)
     cv2.waitKey()
     cv2.destroyAllWindows()
 
 
 _MVA = .05
+
 
 def profile(self, net):
     pass

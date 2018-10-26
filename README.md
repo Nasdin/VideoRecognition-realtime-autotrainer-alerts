@@ -34,7 +34,7 @@ See training section
 
 # Usage
 #### Getting Data
-On the webscraper, indicate the labels in labels.txt, as well as the search terms to use by editing it and change the parameters in config.py then in terminal, type
+On the webscraper, indicate the labels in labels.txt, and change the parameters in config.py if needed then in terminal, type
 
 
 		python downloadimages.py

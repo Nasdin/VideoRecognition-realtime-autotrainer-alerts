@@ -1,7 +1,7 @@
 from . import train
 from . import predict
 from . import data
-from . import misc
+from yolo import misc
 import numpy as np
 
 """ YOLO framework __init__ equivalent"""
