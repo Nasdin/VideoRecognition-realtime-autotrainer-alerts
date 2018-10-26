@@ -62,4 +62,4 @@ def parse_args():
 
 if __name__ == '__main__':
     argument = parse_args()
-    print(argument)
+
