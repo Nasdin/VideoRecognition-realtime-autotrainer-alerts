@@ -16,14 +16,9 @@ save_results = SAVE_RESULTS
 
 def main():
     video_file = input("Path to video file: ")
-    yolo_run(model=model_cfg,weights=model_weight,video_file_or_camera=video_file,use_gpu=use_gpu,save_results=save_results)
-
+    yolo_run(model=model_cfg, weights=model_weight, video_file_or_camera=video_file, use_gpu=use_gpu,
+             save_results=save_results)
 
 
 if __name__ == '__main__':
     main()
-
-
-
-
-

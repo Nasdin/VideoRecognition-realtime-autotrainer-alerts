@@ -10,9 +10,9 @@
 
 ### What is this:
 
-- Automatically trains a class via webscraping image search results on a video recognition classifier with transfer learning.
+- Automatically trains a model via webscraping image search results on a video recognition classifier with transfer learning.
 - Enter a label, then enter a list of search queries to google for. It will then google for those search terms and fine-tunes a pretrained classifier.
-- Detect objects as well as output alerts if an object in your "alert list" is found.
+- Detect objects as well as output alerts/colors differently if an object in your "alert list" is found.
 - Can be performed on a video stream in real-time.
 - Can be performed on a live-camera stream in real-time.
 
@@ -50,7 +50,7 @@ Edit the parameters in train.py and then in batch type:
 #### Testing/Using
 Usage:
 
-	python un.py -v "path_to_video_file" -g -s "test.avi"
+	python run.py -v "path_to_video_file" -g -s "test.avi"
 	
 Explanation
 -v : Whether to use a video file, supply path
