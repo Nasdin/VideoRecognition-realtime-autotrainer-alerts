@@ -2,9 +2,7 @@ import numpy as np
 cimport numpy as np
 cimport cython
 from libc.math cimport exp
-from darkflow.darkflow.utils.box import BoundBox
-
-
+from util.util import BoundBox
 
 #OVERLAP
 @cython.boundscheck(False) # turn off bounds-checking for entire function

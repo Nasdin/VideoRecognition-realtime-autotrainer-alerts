@@ -1,32 +1,21 @@
+import glob
+import os
+import sys
+from xml.etree import ElementTree as ET
+
 import numpy as np
-import cv2
 
 
-def load_weights(model, yolo_weight_file):
-    data = np.fromfile(yolo_weight_file, np.float32)
-    data = data[4:]
-
-    index = 0
-    for layer in model.layers:
-        shape = [w.shape for w in layer.get_weights()]
-        if shape != []:
-            kshape, bshape = shape
-            bia = data[index:index + np.prod(bshape)].reshape(bshape)
-            index += np.prod(bshape)
-            ker = data[index:index + np.prod(kshape)].reshape(kshape)
-            index += np.prod(kshape)
-            layer.set_weights([ker, bia])
-
-
-class Box:
-    def __init__(self):
+class BoundBox:
+    def __init__(self, classes):
         self.x, self.y = float(), float()
         self.w, self.h = float(), float()
         self.c = float()
-        self.prob = float()
+        self.class_num = classes
+        self.probs = np.zeros((classes,))
 
 
-def overlap(x1, w1, x2, w2):
+def overlap(x1,w1,x2,w2):
     l1 = x1 - w1 / 2.;
     l2 = x2 - w2 / 2.;
     left = max(l1, l2)
@@ -54,68 +43,117 @@ def box_iou(a, b):
     return box_intersection(a, b) / box_union(a, b);
 
 
-def yolo_net_out_to_car_boxes(net_out, threshold=0.2, sqrt=1.8, C=20, B=2, S=7):
-    class_num = 6
-    boxes = []
-    SS = S * S  # number of grid cells
-    prob_size = SS * C  # class probabilities
-    conf_size = SS * B  # confidences for each grid cell
-
-    probs = net_out[0: prob_size]
-    confs = net_out[prob_size: (prob_size + conf_size)]
-    cords = net_out[(prob_size + conf_size):]
-    probs = probs.reshape([SS, C])
-    confs = confs.reshape([SS, B])
-    cords = cords.reshape([SS, B, 4])
-
-    for grid in range(SS):
-        for b in range(B):
-            bx = Box()
-            bx.c = confs[grid, b]
-            bx.x = (cords[grid, b, 0] + grid % S) / S
-            bx.y = (cords[grid, b, 1] + grid // S) / S
-            bx.w = cords[grid, b, 2] ** sqrt
-            bx.h = cords[grid, b, 3] ** sqrt
-            p = probs[grid, :] * bx.c
-
-            if p[class_num] >= threshold:
-                bx.prob = p[class_num]
-                boxes.append(bx)
-
-    # combine boxes that are overlap
-    boxes.sort(key=lambda b: b.prob, reverse=True)
-    for i in range(len(boxes)):
-        boxi = boxes[i]
-        if boxi.prob == 0: continue
-        for j in range(i + 1, len(boxes)):
-            boxj = boxes[j]
-            if box_iou(boxi, boxj) >= .4:
-                boxes[j].prob = 0.
-    boxes = [b for b in boxes if b.prob > 0.]
-
-    return boxes
+def prob_compare(box):
+    return box.probs[box.class_num]
 
 
-def draw_box(boxes, im, crop_dim):
-    imgcv = im
-    [xmin, xmax] = crop_dim[0]
-    [ymin, ymax] = crop_dim[1]
-    for b in boxes:
-        h, w, _ = imgcv.shape
-        left = int((b.x - b.w / 2.) * w)
-        right = int((b.x + b.w / 2.) * w)
-        top = int((b.y - b.h / 2.) * h)
-        bot = int((b.y + b.h / 2.) * h)
-        left = int(left * (xmax - xmin) / w + xmin)
-        right = int(right * (xmax - xmin) / w + xmin)
-        top = int(top * (ymax - ymin) / h + ymin)
-        bot = int(bot * (ymax - ymin) / h + ymin)
+def prob_compare2(boxa, boxb):
+    if (boxa.pi < boxb.pi):
+        return 1
+    elif(boxa.pi == boxb.pi):
+        return 0
+    else:
+        return -1
 
-        if left < 0:  left = 0
-        if right > w - 1: right = w - 1
-        if top < 0:   top = 0
-        if bot > h - 1:   bot = h - 1
-        thick = int((h + w) // 150)
-        cv2.rectangle(imgcv, (left, top), (right, bot), (255, 0, 0), thick)
 
-    return imgcv
+def imcv2_recolor(im, a = .1):
+	t = [np.random.uniform()]
+	t += [np.random.uniform()]
+	t += [np.random.uniform()]
+	t = np.array(t) * 2. - 1.
+
+	# random amplify each channel
+	im = im * (1 + t * a)
+	mx = 255. * (1 + a)
+	up = np.random.uniform() * 2 - 1
+# 	im = np.power(im/mx, 1. + up * .5)
+	im = cv2.pow(im/mx, 1. + up * .5)
+	return np.array(im * 255., np.uint8)
+
+
+def imcv2_affine_trans(im):
+	# Scale and translate
+	h, w, c = im.shape
+	scale = np.random.uniform() / 10. + 1.
+	max_offx = (scale-1.) * w
+	max_offy = (scale-1.) * h
+	offx = int(np.random.uniform() * max_offx)
+	offy = int(np.random.uniform() * max_offy)
+
+	im = cv2.resize(im, (0,0), fx = scale, fy = scale)
+	im = im[offy : (offy + h), offx : (offx + w)]
+	flip = np.random.binomial(1, .5)
+	if flip: im = cv2.flip(im, 1)
+	return im, [w, h, c], [scale, [offx, offy], flip]
+
+
+def _pp(l): # pretty printing
+    for i in l: print('{}: {}'.format(i,l[i]))
+
+
+def pascal_voc_clean_xml(ANN, pick, exclusive = False):
+    print('Parsing for {} {}'.format(
+            pick, 'exclusively' * int(exclusive)))
+
+    dumps = list()
+    cur_dir = os.getcwd()
+    os.chdir(ANN)
+    annotations = os.listdir('.')
+    annotations = glob.glob(str(annotations)+'*.xml')
+    size = len(annotations)
+
+    for i, file in enumerate(annotations):
+        # progress bar
+        sys.stdout.write('\r')
+        percentage = 1. * (i+1) / size
+        progress = int(percentage * 20)
+        bar_arg = [progress*'=', ' '*(19-progress), percentage*100]
+        bar_arg += [file]
+        sys.stdout.write('[{}>{}]{:.0f}%  {}'.format(*bar_arg))
+        sys.stdout.flush()
+
+        # actual parsing
+        in_file = open(file)
+        tree=ET.parse(in_file)
+        root = tree.getroot()
+        jpg = str(root.find('filename').text)
+        imsize = root.find('size')
+        w = int(imsize.find('width').text)
+        h = int(imsize.find('height').text)
+        all = list()
+
+        for obj in root.iter('object'):
+                current = list()
+                name = obj.find('name').text
+                if name not in pick:
+                        continue
+
+                xmlbox = obj.find('bndbox')
+                xn = int(float(xmlbox.find('xmin').text))
+                xx = int(float(xmlbox.find('xmax').text))
+                yn = int(float(xmlbox.find('ymin').text))
+                yx = int(float(xmlbox.find('ymax').text))
+                current = [name,xn,yn,xx,yx]
+                all += [current]
+
+        add = [[jpg, [w, h, all]]]
+        dumps += add
+        in_file.close()
+
+    # gather all stats
+    stat = dict()
+    for dump in dumps:
+        all = dump[1][2]
+        for current in all:
+            if current[0] in pick:
+                if current[0] in stat:
+                    stat[current[0]]+=1
+                else:
+                    stat[current[0]] =1
+
+    print('\nStatistics:')
+    _pp(stat)
+    print('Dataset size: {}'.format(len(dumps)))
+
+    os.chdir(cur_dir)
+    return dumps

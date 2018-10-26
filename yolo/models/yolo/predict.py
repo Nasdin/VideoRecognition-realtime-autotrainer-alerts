@@ -1,5 +1,4 @@
-from ...utils.im_transform import imcv2_recolor, imcv2_affine_trans
-from ...utils.box import BoundBox, box_iou, prob_compare
+from util.util import BoundBox, box_iou, prob_compare, imcv2_recolor, imcv2_affine_trans
 import numpy as np
 import cv2
 import os

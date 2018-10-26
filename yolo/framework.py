@@ -1,11 +1,10 @@
-from darkflow.darkflow.net import yolo
+from yolo.models import yolo, vanilla
 from darkflow.darkflow.net import yolov2
-from darkflow.darkflow.net import vanilla
 from os.path import basename
 
 class framework(object):
     constructor = vanilla.constructor
-    loss = vanilla.train.loss
+    loss = yolo.models.vanilla.train.loss
     
     def __init__(self, meta, FLAGS):
         model = basename(meta['model'])
@@ -19,30 +18,30 @@ class framework(object):
 
 class YOLO(framework):
     constructor = yolo.moels.constructor
-    parse = yolo.data.parse
-    shuffle = yolo.data.shuffle
-    preprocess = yolo.predict.preprocess
-    postprocess = yolo.predict.postprocess
-    loss = yolo.train.loss
+    parse = yolo.models.yolo.data.parse
+    shuffle = yolo.models.yolo.data.shuffle
+    preprocess = yolo.models.yolo.predict.preprocess
+    postprocess = yolo.models.yolo.predict.postprocess
+    loss = yolo.models.yolo.train.loss
     is_inp = yolo.misc.is_inp
     profile = yolo.misc.profile
-    _batch = yolo.data._batch
-    resize_input = yolo.predict.resize_input
-    findboxes = yolo.predict.findboxes
-    process_box = yolo.predict.process_box
+    _batch = yolo.models.yolo.data._batch
+    resize_input = yolo.models.yolo.predict.resize_input
+    findboxes = yolo.models.yolo.predict.findboxes
+    process_box = yolo.models.yolo.predict.process_box
 
 class YOLOv2(framework):
     constructor = yolo.moels.constructor
-    parse = yolo.data.parse
+    parse = yolo.models.yolo.data.parse
     shuffle = yolov2.data.shuffle
-    preprocess = yolo.predict.preprocess
+    preprocess = yolo.models.yolo.predict.preprocess
     loss = yolov2.train.loss
     is_inp = yolo.misc.is_inp
     postprocess = yolov2.predict.postprocess
     _batch = yolov2.data._batch
-    resize_input = yolo.predict.resize_input
+    resize_input = yolo.models.yolo.predict.resize_input
     findboxes = yolov2.predict.findboxes
-    process_box = yolo.predict.process_box
+    process_box = yolo.models.yolo.predict.process_box
 
 """
 framework factory
