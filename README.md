@@ -18,19 +18,26 @@
 
 
 ### Prerequisities
+0. Anaconda 3
 1.  Python 3
-2.  ffmpeg
-3. OpenCV
-4. OpenCV-Python
-5. Tensorflow-GPU
-6. CUDNN and CUDA ToolKit
+2. CUDNN and CUDA ToolKit Installed
+3. GPU with CUDA 9.0 and above support
 
+## Installation Instructions:
+- A conda environment file has been provided, please make use of environment file to install the necessary requirement packages.
+
+
+		conda create -n "YourEnvironmentName" -f environment.yml
+
+Remember to download pretrained weights if you need to
+See training section
 
 # Usage
 #### Getting Data
 On the webscraper, indicate the label, as well as the search terms to use by editing it and change the parameters in downloadimages.py then in batch, type
 
-	python downloadimages.py
+
+		python downloadimages.py
 
 #### Training
 Once images are downloaded. You can download pretrained weights here: 
@@ -38,24 +45,28 @@ Once images are downloaded. You can download pretrained weights here:
 Or you can continue training your weights if you've done this before
 Edit the parameters in train.py and then in batch type:
 
-	python train.py
+		python train.py
 
 #### Testing/Using
-You can test on either a video file, through video_run.py
-You can test on a live webcam feed through camera_run.py
+Usage:
 
-	python video_run.py
-	python camera_run.py
+	python un.py -v "path_to_video_file" -g -s "test.avi"
 	
-You will be asked for the path of the video file. You can adjust the parameters as well as the paths of the weights by opening up the py files.
+Explanation
+-v : Whether to use a video file, supply path
+If not video file, assume to use camera feed.
+-g : Optional, whether to use GPU ( Defaults to config)
+-ng: Optional, whether to NOT use GPU ( Defaults to config)
+-s: Optional, whether to save results to a video file and where (Defaults to config)
 
-#### Testing/Using
-You can test on either a video file, through video_run.py
-You can test on a live webcam beed through camera_run.py
+### Configs
 
-	python video_run.py
-	python camera_run.py
-	
+There is a config.py provided which helps to set the defaults for the following:
+1. 	Edit the path to weight file
+2. 	USE GPU? Bool
+3. 	SAVE Result video file? Bool
+
+
 You will be asked for the path of the video file. You can adjust the parameters as well as the paths of the weights by opening up the py files.
 
 #### Setting Alerts

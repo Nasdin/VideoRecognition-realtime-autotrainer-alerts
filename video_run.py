@@ -1,17 +1,17 @@
 # Author: Nasrudin Bin Salim
 # Copyright (C) Nasrudin B Salim 2018
 from util.parser import yolo_run
-
+from config import *
 
 # Parameters here
 
 ## Path to model and weight
-model_cfg = 'weights/yolo-voc.cfg'
-model_weight = 'weights/yolov2.weights'
+model_cfg = MODEL_CFG_FILE_PATH
+model_weight = MODEL_WEIGHT
 
 # Bools
-use_gpu = True
-save_results = True
+use_gpu = USE_GPU
+save_results = SAVE_RESULTS
 
 
 def main():
