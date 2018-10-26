@@ -81,6 +81,11 @@ You will be asked for the path of the video file. You can adjust the parameters 
 #### Setting Alerts
 You can set alerts by editing the text file "alerts.txt" when a label found in this text file appears, it will generate an alert by drawing the box red and displaying "Alert x found in footage" when testing.
 
+#### HELP AND CONTRIBUTION
 
+	This project needs your help and contribution
+	The Training Script needs work.
+	The Alerts and Pinging requires work to finish.
+	Downloading of images from google and seamless Training
 
 
