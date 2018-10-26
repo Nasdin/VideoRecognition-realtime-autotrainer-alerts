@@ -45,19 +45,20 @@ Once images are downloaded. You can download pretrained weights here:
 Or you can continue training your weights if you've done this before
 Edit the parameters in train.py and then in batch type:
 
-		python train.py
+		python train.py -g
+
+-g : Whether to use GPU
 
 #### Testing/Using
 Usage:
 
-	python run.py -v "path_to_video_file" -g -s "test.avi"
+	python run.py "path_to_video_file" -g -s "test.avi"
 	
 Explanation
--v : Whether to use a video file, supply path
+Whether to use a video file, supply path
 If not video file, assume to use camera feed.
--g : Optional, whether to use GPU ( Defaults to config)
--ng: Optional, whether to NOT use GPU ( Defaults to config)
--s: Optional, whether to save results to a video file and where (Defaults to config)
+-g /--gpu : Optional, whether to use GPU ( Defaults to config)
+-s /--save: Optional, whether to save results to a video file and where (Defaults to config)
 
 ### Configs
 
